@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<databinding : ViewBinding>(@LayoutRes var layout: Int) : Fragment() {
-    lateinit var binding : databinding
+abstract class BaseFragment<T : ViewBinding>(@LayoutRes var layout: Int) : Fragment() {
+    lateinit var binding : T
 
     private fun start(inflater: LayoutInflater, container: ViewGroup?){
         binding = DataBindingUtil.inflate(inflater,layout,container,false)

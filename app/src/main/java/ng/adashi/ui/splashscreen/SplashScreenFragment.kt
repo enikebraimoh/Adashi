@@ -1,15 +1,17 @@
 package ng.adashi.ui.splashscreen
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.os.Handler
+import androidx.navigation.fragment.findNavController
 import ng.adashi.R
-import ng.adashi.core.BaseFragment
+import ng.adashi.core.BaseFullScreenFragment
 import ng.adashi.databinding.FragmentSplashScreenBinding
+import ng.adashi.utils.Constants
 
-class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding>(R.layout.fragment_splash_screen){
-
-
+class SplashScreenFragment : BaseFullScreenFragment<FragmentSplashScreenBinding>(R.layout.fragment_splash_screen){
+    override fun onResume() {
+        super.onResume()
+        Handler().postDelayed({
+                findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToWelcomeFragment())
+             }, Constants.SPLASH_SCREEN_TIMEER)
+    }
 }
