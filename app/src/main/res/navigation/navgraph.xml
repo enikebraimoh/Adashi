@@ -13,11 +13,28 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/fade_in_logo"
+            app:exitAnim="@android:anim/fade_out"
+            app:launchSingleTop="true"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_welcome"
         android:id="@+id/welcomeFragment"
         android:name="ng.adashi.ui.welcomescreen.WelcomeFragment"
-        android:label="WelcomeFragment" />
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_login"
+        android:id="@+id/loginFragment"
+        android:name="ng.adashi.ui.login.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>
