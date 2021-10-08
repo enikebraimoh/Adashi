@@ -69,7 +69,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/secondaryColor"
-            android:padding="15dp"
+            android:padding="18dp"
             android:text="Login"
             android:textAllCaps="false"
             android:textColor="@color/primaryColor"
@@ -83,12 +83,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/create_account_button"
+            android:layout_marginTop="32dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:padding="15dp"
+            android:padding="18dp"
             android:text="Create an account"
             android:textAllCaps="false"
             android:textColor="@color/white"
