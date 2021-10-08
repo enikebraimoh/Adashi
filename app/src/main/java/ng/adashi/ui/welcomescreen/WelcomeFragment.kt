@@ -16,6 +16,9 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_w
         binding.loginButton.setOnClickListener {
             findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment())
         }
+        binding.createAccountButton.setOnClickListener {
+            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToSignupFragment())
+        }
     }
 
 }

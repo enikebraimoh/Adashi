@@ -31,10 +31,18 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
         android:name="ng.adashi.ui.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        tools:layout="@layout/fragment_signup"
+        android:id="@+id/signupFragment"
+        android:name="ng.adashi.ui.signup.SignupFragment"
+        android:label="SignupFragment" />
 </navigation>

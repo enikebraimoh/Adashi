@@ -15,7 +15,7 @@
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.Adashi">
-        <item name="android:windowBackground">@drawable/abstract_bg</item>
+        <item name="android:windowBackground">@drawable/abstract_bg_green</item>
     </style>
 
 </resources>
