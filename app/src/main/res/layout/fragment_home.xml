@@ -109,15 +109,143 @@
 
                 <TextView
                     android:id="@+id/quick_actions"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/poppins_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Quick Actions"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+                <HorizontalScrollView
+                    android:id="@+id/quick_actions_scrollview"
+                    app:layout_constraintTop_toBottomOf="@+id/quick_actions"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:orientation="vertical"
+                                android:background="@drawable/quick_actions_bg"
+                                android:layout_margin="10dp"
+                                android:padding="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:src="@drawable/ic_saving_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Savings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:orientation="vertical"
+                                android:background="@drawable/quick_actions_bg"
+                                android:layout_margin="10dp"
+                                android:padding="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:src="@drawable/ic_payout_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Payout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:orientation="vertical"
+                                android:background="@drawable/quick_actions_bg"
+                                android:layout_margin="10dp"
+                                android:padding="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:src="@drawable/ic_deposit_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Deposit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:orientation="vertical"
+                                android:background="@drawable/quick_actions_bg"
+                                android:layout_margin="10dp"
+                                android:padding="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:src="@drawable/ic_withdraw_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Withdraw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/recent_transactions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Recent Transactions"
+                    app:layout_constraintStart_toStartOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/quick_actions_scrollview" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    tools:listitem="@layout/transaction_item_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_transactions"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
