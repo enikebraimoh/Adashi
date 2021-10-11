@@ -43,10 +43,34 @@
         tools:layout="@layout/fragment_login"
         android:id="@+id/loginFragment"
         android:name="ng.adashi.ui.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_signup"
         android:id="@+id/signupFragment"
         android:name="ng.adashi.ui.signup.SignupFragment"
         android:label="SignupFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="ng.adashi.ui.home.homeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/saversFragment"
+        android:name="ng.adashi.ui.savers.SaversFragment"
+        android:label="fragment_savers"
+        tools:layout="@layout/fragment_savers" />
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="ng.adashi.ui.transactions.TransactionsFragment"
+        android:label="fragment_transactions"
+        tools:layout="@layout/fragment_transactions" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="ng.adashi.ui.more.MoreFragment"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" />
 </navigation>

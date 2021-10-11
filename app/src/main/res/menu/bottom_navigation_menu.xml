@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_icon" />
+    <item
+        android:id="@+id/saversFragment"
+        android:title="Savers"
+        android:enabled="true"
+        android:icon="@drawable/ic_savers_icon" />
+    <item
+        android:id="@+id/transactionsFragment"
+        android:title="Transactions"
+        android:enabled="true"
+        android:icon="@drawable/ic_transactions_icon"/>
+    <item
+        android:id="@+id/moreFragment"
+        android:title="More"
+        android:enabled="true"
+        android:icon="@drawable/ic_more_icon"/>
+
+</menu>
