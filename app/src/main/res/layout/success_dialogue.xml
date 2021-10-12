@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+            <LinearLayout
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_money_bag"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Payment completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Please tell the saver to check their \nMeesage for verifications"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+</layout>
