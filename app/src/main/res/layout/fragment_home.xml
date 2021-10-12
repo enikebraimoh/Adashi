@@ -131,6 +131,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/savings"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
@@ -142,10 +143,11 @@
                                 android:padding="30dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
+
                                 <ImageView
-                                    android:src="@drawable/ic_saving_icon"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_saving_icon" />
                             </RelativeLayout>
                             <TextView
                                 android:fontFamily="@font/poppins_regular"
@@ -154,6 +156,7 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/payout"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
@@ -177,6 +180,7 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/deposit"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
@@ -200,6 +204,7 @@
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/withdraw"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
