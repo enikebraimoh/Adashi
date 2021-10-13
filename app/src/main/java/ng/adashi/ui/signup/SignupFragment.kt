@@ -12,4 +12,5 @@ import ng.adashi.databinding.FragmentSignupBinding
 class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_signup) {
 
 
+
 }

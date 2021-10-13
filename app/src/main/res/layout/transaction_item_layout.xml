@@ -10,8 +10,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginEnd="@dimen/margin_10_dp"
+        android:layout_marginStart="@dimen/margin_10_dp"
+        android:padding="@dimen/margin_10_dp"
         android:layout_marginBottom="10dp"
-        android:background="?android:colorBackground"
+        android:background="@drawable/transaction_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -22,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             amount="@{data}"
+            tools:text="Today Aug. 21, 2021 (2:00PM)"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/withdrawal"
             app:layout_constraintTop_toBottomOf="@+id/withdrawal" />
@@ -31,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             amount="@{data}"
+            tools:text="Transfer - Enike Braimoh"
             app:layout_constraintBottom_toTopOf="@+id/date_and_time"
             app:layout_constraintEnd_toStartOf="@+id/ammount"
             app:layout_constraintHorizontal_bias="0.1"
@@ -40,9 +45,9 @@
 
         <TextView
             android:id="@+id/ammount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            amount="@{data}"
+            android:background="@drawable/transaction_type"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             app:layout_constraintBottom_toTopOf="@+id/successful"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
@@ -55,9 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            tools:text="-2,0000"
             amount="@{data}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/ammount"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ammount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
