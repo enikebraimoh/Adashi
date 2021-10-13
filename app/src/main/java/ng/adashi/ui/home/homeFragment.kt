@@ -58,7 +58,7 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             BS.show(requireActivity().supportFragmentManager, "something")
 
         }
-        binding.savings.setOnClickListener {
+        binding.withdrawal.setOnClickListener {
             val BS = WithdrawBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
 
