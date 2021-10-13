@@ -1,10 +1,8 @@
 package ng.adashi.ui.home
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
@@ -17,9 +15,25 @@ import ng.adashi.ui.payout.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 
 class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    override fun onStart() {
-        super.onStart()
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.tool_bar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.toolbar_menu -> {
+                findNavController().navigate(R.id.notificationsFragment)
+                true
+            }
+            else -> false
+        }
+    }
+
+    override fun start() {
+        setHasOptionsMenu(true)
         // fake data
         var listData = mutableListOf<Transactions>(
             Transactions(44),
@@ -34,7 +48,7 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             BS.show(requireActivity().supportFragmentManager, "something")
 
         }
-        binding.payout.setOnClickListener {
+        binding.deposit.setOnClickListener {
             val BS = PayoutBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
 
@@ -44,7 +58,7 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             BS.show(requireActivity().supportFragmentManager, "something")
 
         }
-        binding.withdraw.setOnClickListener {
+        binding.savings.setOnClickListener {
             val BS = WithdrawBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
 

@@ -2,18 +2,29 @@ package ng.adashi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import ng.adashi.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
-    private lateinit var navController: NavController
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding : ActivityMainBinding
+    lateinit var navController: NavController
+    lateinit var drawer : DrawerLayout
+    lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +36,26 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
         navController = navHostFragment.navController
+
+        // initialized drawer binding
+        drawer =  binding.drawerLayout
+
+        //for appbar & drawer layout
+        setSupportActionBar(binding.toolbar)
+        val appBarConfig = AppBarConfiguration(setOf(R.id.homeFragment), binding.drawerLayout)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        NavigationUI.setupWithNavController(
+            binding.toolbar,
+            navController,
+            appBarConfig
+        )
+        setupWithNavController(binding.navview,navController)
+        NavigationUI.setupActionBarWithNavController(this,navController,drawer)
+
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         setupNavigation()
-        binding.bottomNavigation.setupWithNavController(navController)
 
     }
 
@@ -35,26 +64,56 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment -> {
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                    supportActionBar?.show()
+                    binding.toolbar.title = "Good Morning 👋🏽"
+                    binding.toolbar.setNavigationIcon(R.drawable.ic_menu)
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
-                R.id.saversFragment -> {
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                R.id.splashScreenFragment -> {
+                    supportActionBar?.hide()
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
-                R.id.transactionsFragment -> {
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                R.id.welcomeFragment -> {
+                    supportActionBar?.hide()
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
-                R.id.moreFragment -> {
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                R.id.loginFragment -> {
+                    supportActionBar?.show()
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+                R.id.signupFragment -> {
+                    supportActionBar?.show()
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 else -> {
-                    binding.bottomNavigation.visibility = View.GONE
+                    supportActionBar?.show()
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
             }
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        val navController = this.findNavController(R.id.nav_host_fragment_container)
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home ->
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+
+        }
+
+        return item.onNavDestinationSelected(findNavController(R.id.fragmentContainerView2)) || super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
 

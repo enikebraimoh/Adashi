@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_10_dp">10dp</dimen>
+    <dimen name="margin_15_dp">15dp</dimen>
+    <dimen name="margin_20_dp">20dp</dimen>
+    <dimen name="margin_23_dp">23dp</dimen>
+    <dimen name="margin_30_dp">30dp</dimen>
+    <dimen name="margin_40_dp">40dp</dimen>
+    <dimen name="card_view">20dp</dimen>
+</resources>

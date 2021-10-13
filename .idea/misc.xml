@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/cornercircle.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable-v24/ic_menu.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable-v24/rounded.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/cornercircle.xml" value="0.27037037037037037" />
         <entry key="app/src/main/res/drawable/quick_actions_bg.xml" value="0.24351851851851852" />
@@ -11,19 +12,22 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_savings_dialogue_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/deposit_dialogue_sheet.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2980030721966206" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_savers.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.27685185185185185" />
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/header_nav.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/payout_dialogue_sheet.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/success_dialogue.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/transaction_item_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/withdraw_dialogue_sheet.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2953125" />
+        <entry key="app/src/main/res/menu/tool_bar_menu.xml" value="0.165" />
       </map>
     </option>
   </component>
