@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="10dp"
-    android:background="?android:colorBackground"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="ng.adashi.models.Transactions" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="10dp"
+        android:background="?android:colorBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/date_and_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="20.Oct.2021 | 5:00am"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/withdrawal"
-        app:layout_constraintTop_toBottomOf="@+id/withdrawal" />
+        <TextView
+            android:id="@+id/date_and_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            amount="@{data}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/withdrawal"
+            app:layout_constraintTop_toBottomOf="@+id/withdrawal" />
 
-    <TextView
-        android:id="@+id/withdrawal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Withdraw - 2135456844"
-        app:layout_constraintBottom_toTopOf="@+id/date_and_time"
-        app:layout_constraintEnd_toStartOf="@+id/ammount"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/withdrawal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            amount="@{data}"
+            app:layout_constraintBottom_toTopOf="@+id/date_and_time"
+            app:layout_constraintEnd_toStartOf="@+id/ammount"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/ammount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="20,000.00"
-        app:layout_constraintBottom_toTopOf="@+id/successful"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/date_and_time"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/ammount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            amount="@{data}"
+            app:layout_constraintBottom_toTopOf="@+id/successful"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toEndOf="@+id/date_and_time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/successful"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:text="Successful"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ammount"
-        app:layout_constraintTop_toBottomOf="@+id/ammount" />
+        <TextView
+            android:id="@+id/successful"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            amount="@{data}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ammount"
+            app:layout_constraintTop_toBottomOf="@+id/ammount" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

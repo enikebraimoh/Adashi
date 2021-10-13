@@ -244,7 +244,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/quick_actions_scrollview" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
                     android:layout_marginTop="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/transaction_item_layout"
                     app:layout_constraintTop_toBottomOf="@+id/recent_transactions"
                     app:layout_constraintStart_toStartOf="parent"
