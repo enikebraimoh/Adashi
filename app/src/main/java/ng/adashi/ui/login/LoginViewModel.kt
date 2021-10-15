@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,9 +21,25 @@ import java.io.IOException
 
 class LoginViewModel(val app : Application, val loginRepository: LoginRepository) : ViewModel() {
 
+    var email: String? = null
+    var password: String? = null
+
     private val _login = MutableLiveData<Resource<LoginResponse>>()
     val login: LiveData<Resource<LoginResponse>> get() = _login
 
+    private val _passwordError = MutableLiveData<String>()
+    val passwordError: LiveData<String> get() = _passwordError
+
+    private val _emailError = MutableLiveData<String>()
+    val emailError: LiveData<String> get() = _emailError
+
+    fun login() {
+        if (verifyEmail()) {
+            if (verifyPassword()) {
+                logUsersIn(LoginDetails(email!!,password!!))
+            }
+        }
+    }
 
     //call the function that gets all vendors from the repository
     fun logUsersIn(login : LoginDetails) = viewModelScope.launch {
@@ -51,19 +68,38 @@ class LoginViewModel(val app : Application, val loginRepository: LoginRepository
 
     private fun handleLoginResponse(response: Response<LoginResponse>): Resource<LoginResponse> {
         if (response.isSuccessful) {
-            response.body().let { loginResponse ->
-
-                return Resource.success(loginResponse)
+            response.body().let { vendorResponse ->
+                return Resource.success(vendorResponse)
             }
         }
-        return Resource.error(response.message())
+        response.body().let { vendorResponse ->
+            return Resource.success(vendorResponse)
+        }
+
     }
 
+    private fun verifyEmail(): Boolean {
+        return if (email == null || email == "") {
+            _emailError.value = "field must not be blank"
+            false
+        } else if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            _emailError.value = null
+            true
+        } else {
+            _emailError.value = "invalid email"
+            false
+        }
+    }
 
-
-
-
-
+    private fun verifyPassword(): Boolean {
+        return if (password == null || password == "") {
+            _passwordError.value = "Password field cannot be blank"
+            false
+        } else {
+            _passwordError.value = null
+            true
+        }
+    }
 
     private fun hasInternet(): Boolean {
         val connectivityManager = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

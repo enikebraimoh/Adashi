@@ -44,24 +44,26 @@
             app:layout_constraintTop_toBottomOf="@+id/logo" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_number_field"
+            android:id="@+id/email_field"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
+            verify_field="@{data.emailError}"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Mobile Number"
+            android:hint="Email Address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_number"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
+                android:text="@={data.email}"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="textEmailAddress"
                 android:fontFamily="@font/poppins_regular"
                 android:padding="20dp"
                 android:singleLine="true" />
@@ -75,19 +77,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            verify_field="@{data.passwordError}"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
             android:hint="Password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_number_field"
+            app:layout_constraintTop_toBottomOf="@+id/email_field"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
+                android:text="@={data.password}"
                 android:layout_height="wrap_content"
-                android:inputType="numberPassword"
+                android:inputType="textPassword"
                 android:padding="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:singleLine="true" />
@@ -114,6 +118,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:padding="18dp"
+            android:onClick="@{()->data.login()}"
             android:text="Login"
             android:textAllCaps="false"
             app:layout_constraintBottom_toTopOf="@+id/switch1"

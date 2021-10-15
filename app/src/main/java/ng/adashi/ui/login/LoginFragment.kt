@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
 import ng.adashi.repository.LoginRepository
+import ng.adashi.utils.Status
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
@@ -22,11 +25,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.data = viewModel
         binding.lifecycleOwner = this
 
-        binding.loginButton.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-        }
+        viewModel.login.observe(this,{ response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                }
+                Status.ERROR -> {
+                    showSnackBar(response.message.toString())
+                }
+                Status.LOADING -> {
+                    showSnackBar("Loading.....")
+                }
 
+            }
 
+        })
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(requireActivity(), binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
 }
