@@ -22,7 +22,7 @@ object RetrofitInstance {
 
     private val retrofit by lazy {
        Retrofit.Builder()
-           .addConverterFactory(MoshiConverterFactory.create(moshi))
+           .addConverterFactory(GsonConverterFactory.create())
            .baseUrl(BASE_URL)
            .client(client)
            .build()
