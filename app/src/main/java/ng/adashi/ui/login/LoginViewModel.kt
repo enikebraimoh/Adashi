@@ -10,6 +10,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ng.adashi.models.login.LoginDetails
 import ng.adashi.models.login.LoginResponse
@@ -23,7 +27,7 @@ import retrofit2.Response
 import java.io.IOException
 import java.lang.Exception
 
-class LoginViewModel(val app : Application, val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(val app: Application, val loginRepository: LoginRepository) : ViewModel() {
 
     var email: String? = null
     var password: String? = null
@@ -40,47 +44,19 @@ class LoginViewModel(val app : Application, val loginRepository: LoginRepository
     fun login() {
         if (verifyEmail()) {
             if (verifyPassword()) {
-                logUsersIn(LoginDetails(email!!,password!!))
+                logUsersIn(LoginDetails(email!!, password!!))
             }
         }
     }
 
     //call the function that gets all vendors from the repository
-    fun logUsersIn(login : LoginDetails) = viewModelScope.launch {
-        loginFromRepository(login)
-    }
-
-    private suspend fun loginFromRepository(logindetails : LoginDetails) {
-
-        try {
-            if (hasInternet()) {
-                _login.value = DataState.Loading
-                try {
-                    val response = loginRepository.logMeIn(logindetails)
-                    if (response.isSuccessful) {
-                        response.body().let { response ->
-                            _login.value =   DataState.Success(response!!)
-                        }
-                    }
-                }catch (e: Throwable){
-                    when (e) {
-                        is IOException -> _login.value = (DataState.Error(e))
-                        is HttpException -> {
-                            val status = e.code()
-                            val res = convertErrorBody(e)
-                            _login.value = (DataState.GenericError(status, res))
-                        }
-                    }
-                }
-            }
-
-        } catch (t: Throwable) {
-            when (t) {
-                is IOException -> _login.value = (DataState.Error(t))
-            }
+    fun logUsersIn(login: LoginDetails) {
+        viewModelScope.launch {
+            loginRepository.LogUserIn(login).onEach { state ->
+                _login.value = state
+            }.launchIn(viewModelScope)
 
         }
-
     }
 
     private fun verifyEmail(): Boolean {
@@ -107,11 +83,13 @@ class LoginViewModel(val app : Application, val loginRepository: LoginRepository
     }
 
     private fun hasInternet(): Boolean {
-        val connectivityManager = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val activeNetwork = connectivityManager.activeNetwork ?: return false
-            val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
 
             return when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true

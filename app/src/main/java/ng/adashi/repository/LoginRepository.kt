@@ -1,9 +1,18 @@
 package ng.adashi.repository
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ng.adashi.models.login.LoginDetails
-import ng.adashi.network.RetrofitInstance
+import ng.adashi.models.login.LoginResponse
+import ng.adashi.network.NetworkDataSource
+import ng.adashi.utils.DataState
 
-class LoginRepository {
+class LoginRepository ( private val networkDataSource: NetworkDataSource,) {
 
-    suspend fun logMeIn(login : LoginDetails) = RetrofitInstance.Api.Login(login)
+    suspend fun LogUserIn (loginDetails: LoginDetails) : Flow<DataState<LoginResponse>> =
+        networkDataSource.login(loginDetails).map { state -> state }
+
+
+
+
 }

@@ -13,6 +13,8 @@ import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
 import ng.adashi.models.login.LoginResponse
+import ng.adashi.network.NetworkDataSource
+import ng.adashi.network.RetrofitInstance
 import ng.adashi.repository.LoginRepository
 import ng.adashi.utils.DataState
 import ng.adashi.utils.ErrorResponse
@@ -22,7 +24,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     override fun start() {
         val application = requireNotNull(this.activity).application
-        val viewModelProviderFactory = LoginFactory(application, LoginRepository())
+        val network = NetworkDataSource(RetrofitInstance)
+        val viewModelProviderFactory = LoginFactory(application, LoginRepository(network))
 
         val viewModel = ViewModelProvider(
             requireActivity(),
@@ -32,15 +35,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.lifecycleOwner = this
         viewModel.login.observe(this, { response ->
             when (response) {
-                is DataState.Success<LoginResponse> -> {
-                    showSnackBar("works")
+                is DataState.Success -> {
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
                 is DataState.Error -> {
-                    showSnackBar(response.error?.message.toString())
+                    showSnackBar(response.error.localizedMessage!!)
                 }
                 is DataState.GenericError -> {
-                    showSnackBar("generic error")
+                  showSnackBar(response.error?.message!!)
                 }
                 DataState.Loading -> {
                     showSnackBar("Loading.....")
@@ -51,6 +53,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun showSnackBar(message: String) {
         Snackbar.make(requireActivity(), binding.root, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun displayProgressBar(message: String) {
+
     }
 
 }
