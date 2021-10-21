@@ -12,7 +12,10 @@ import com.google.android.material.snackbar.Snackbar
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
+import ng.adashi.models.login.LoginResponse
 import ng.adashi.repository.LoginRepository
+import ng.adashi.utils.DataState
+import ng.adashi.utils.ErrorResponse
 import ng.adashi.utils.Status
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
@@ -21,24 +24,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         val application = requireNotNull(this.activity).application
         val viewModelProviderFactory = LoginFactory(application, LoginRepository())
 
-        val viewModel = ViewModelProvider(requireActivity(), viewModelProviderFactory).get(LoginViewModel::class.java)
+        val viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelProviderFactory
+        ).get(LoginViewModel::class.java)
         binding.data = viewModel
         binding.lifecycleOwner = this
-
-        viewModel.login.observe(this,{ response ->
-            when (response.status) {
-                Status.SUCCESS -> {
+        viewModel.login.observe(this, { response ->
+            when (response) {
+                is DataState.Success<LoginResponse> -> {
+                    showSnackBar("works")
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
-                Status.ERROR -> {
-                    showSnackBar(response.message.toString())
+                is DataState.Error -> {
+                    showSnackBar(response.error?.message.toString())
                 }
-                Status.LOADING -> {
+                is DataState.GenericError -> {
+                    showSnackBar("generic error")
+                }
+                DataState.Loading -> {
                     showSnackBar("Loading.....")
                 }
-
             }
-
         })
     }
 

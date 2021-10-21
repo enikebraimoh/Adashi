@@ -15,17 +15,21 @@ import ng.adashi.models.login.LoginDetails
 import ng.adashi.models.login.LoginResponse
 import ng.adashi.models.login.LoginToken
 import ng.adashi.repository.LoginRepository
+import ng.adashi.utils.DataState
 import ng.adashi.utils.Resource
+import ng.adashi.utils.convertErrorBody
+import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import java.lang.Exception
 
 class LoginViewModel(val app : Application, val loginRepository: LoginRepository) : ViewModel() {
 
     var email: String? = null
     var password: String? = null
 
-    private val _login = MutableLiveData<Resource<LoginResponse>>()
-    val login: LiveData<Resource<LoginResponse>> get() = _login
+    private val _login = MutableLiveData<DataState<LoginResponse>>()
+    val login: LiveData<DataState<LoginResponse>> get() = _login
 
     private val _passwordError = MutableLiveData<String>()
     val passwordError: LiveData<String> get() = _passwordError
@@ -47,33 +51,34 @@ class LoginViewModel(val app : Application, val loginRepository: LoginRepository
     }
 
     private suspend fun loginFromRepository(logindetails : LoginDetails) {
-        _login.value = Resource.loading()
 
         try {
             if (hasInternet()) {
-                val response = loginRepository.logMeIn(logindetails)
-                _login.value = handleLoginResponse(response)
+                _login.value = DataState.Loading
+                try {
+                    val response = loginRepository.logMeIn(logindetails)
+                    if (response.isSuccessful) {
+                        response.body().let { response ->
+                            _login.value =   DataState.Success(response!!)
+                        }
+                    }
+                }catch (e: Throwable){
+                    when (e) {
+                        is IOException -> _login.value = (DataState.Error(e))
+                        is HttpException -> {
+                            val status = e.code()
+                            val res = convertErrorBody(e)
+                            _login.value = (DataState.GenericError(status, res))
+                        }
+                    }
+                }
             }
-            else _login.value = Resource.error("No Internet Connection")
 
         } catch (t: Throwable) {
             when (t) {
-                is IOException -> _login.value = (Resource.error("Network Failure"))
-                else -> _login.value = (Resource.error("Internal Error"))
+                is IOException -> _login.value = (DataState.Error(t))
             }
 
-        }
-
-    }
-
-    private fun handleLoginResponse(response: Response<LoginResponse>): Resource<LoginResponse> {
-        if (response.isSuccessful) {
-            response.body().let { vendorResponse ->
-                return Resource.success(vendorResponse)
-            }
-        }
-        response.body().let { vendorResponse ->
-            return Resource.success(vendorResponse)
         }
 
     }
