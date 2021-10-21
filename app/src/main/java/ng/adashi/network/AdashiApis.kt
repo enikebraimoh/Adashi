@@ -13,7 +13,7 @@ interface AdashiApis {
     @POST("api/v1/auth/login")
    suspend fun Login(
         @Body loginDetails : LoginDetails
-   ) : Response<LoginResponse>
+   ) : LoginResponse
 
 
 }
