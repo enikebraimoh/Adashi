@@ -1,12 +1,15 @@
 package ng.adashi.models.login
 
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 
 data class LoginResponse(
-    @Json(name = "status")
-    val status: String,
-    @Json(name = "message")
+    @SerializedName("message")
+    @Expose
     val message: String,
-    @Json(name = "data")
+
+    @SerializedName("data")
+    @Expose
     val data: LoginToken
 )
