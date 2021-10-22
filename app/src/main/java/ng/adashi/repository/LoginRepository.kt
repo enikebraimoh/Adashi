@@ -13,5 +13,4 @@ class LoginRepository ( private val networkDataSource: NetworkDataSource,) {
         networkDataSource.login(loginDetails).map { state -> state }
 
 
-
 }
