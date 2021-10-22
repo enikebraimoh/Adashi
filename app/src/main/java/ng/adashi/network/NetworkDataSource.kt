@@ -15,7 +15,7 @@ class NetworkDataSource constructor(private val ApiSource: RetrofitInstance) {
         emit(DataState.Loading)
         try {
             val response = ApiSource.Api.Login(details)
-            DataState.Success(response)
+            emit(DataState.Success(response))
         } catch (e: Exception) {
             when (e){
                 is IOException -> emit(DataState.Error(e))

@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 
 data class LoginToken(
+    @SerializedName("user")
+    @Expose
+    val user : AgentUser?,
 
     @SerializedName("accessToken")
     @Expose
@@ -12,10 +15,5 @@ data class LoginToken(
 
     @SerializedName("refreshToken")
     @Expose
-    val refreshToken: String,
-
-    @SerializedName("user")
-    @Expose
-    @Json(name = "user")
-    val user : AgentUser? = null
+    val refreshToken: String
 )

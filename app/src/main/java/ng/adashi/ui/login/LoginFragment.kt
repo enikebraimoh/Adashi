@@ -35,17 +35,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         binding.lifecycleOwner = this
         viewModel.login.observe(this, { response ->
             when (response) {
-                is DataState.Success -> {
+                is DataState.Success<LoginResponse> -> {
+                    displayProgressBar(false)
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
                 is DataState.Error -> {
+                    displayProgressBar(false)
                     showSnackBar(response.error.localizedMessage!!)
                 }
                 is DataState.GenericError -> {
+                    displayProgressBar(false)
                   showSnackBar(response.error?.message!!)
                 }
                 DataState.Loading -> {
-                    showSnackBar("Loading.....")
+                    displayProgressBar(true)
                 }
             }
         })
@@ -55,7 +58,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         Snackbar.make(requireActivity(), binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
-    private fun displayProgressBar(message: String) {
+    private fun displayProgressBar(isLoading: Boolean) {
+        when (isLoading){
+            true ->{
+                binding.spinKit.visibility = View.VISIBLE
+                binding.loginButton.visibility = View.INVISIBLE
+                binding.emailField.isEnabled = false
+                binding.passwordField.isEnabled = false
+            }
+            false ->{
+                binding.spinKit.visibility = View.INVISIBLE
+                binding.loginButton.visibility = View.VISIBLE
+                binding.emailField.isEnabled = true
+                binding.passwordField.isEnabled = true
+            }
+        }
 
     }
 
