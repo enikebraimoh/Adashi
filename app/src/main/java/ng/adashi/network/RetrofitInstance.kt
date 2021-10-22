@@ -9,9 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import okhttp3.OkHttpClient
 
-
-
-
 object RetrofitInstance {
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

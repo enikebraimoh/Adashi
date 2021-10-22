@@ -49,7 +49,7 @@ class LoginViewModel(val app: Application, val loginRepository: LoginRepository)
         }
     }
 
-    //call the function that gets all vendors from the repository
+    //call the function from the repository
     fun logUsersIn(login: LoginDetails) {
         viewModelScope.launch {
             loginRepository.LogUserIn(login).onEach { state ->
@@ -76,7 +76,10 @@ class LoginViewModel(val app: Application, val loginRepository: LoginRepository)
         return if (password == null || password == "") {
             _passwordError.value = "Password field cannot be blank"
             false
-        } else {
+        }else if (password!!.length < 6) {
+            _passwordError.value = "Password field must have at least 6 characters"
+            false
+        }  else {
             _passwordError.value = null
             true
         }
