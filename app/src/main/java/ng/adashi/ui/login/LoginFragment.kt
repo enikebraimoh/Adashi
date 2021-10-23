@@ -1,24 +1,17 @@
 package ng.adashi.ui.login
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
-import ng.adashi.models.login.LoginResponse
+import ng.adashi.domain_models.login.LoginResponse
 import ng.adashi.network.NetworkDataSource
 import ng.adashi.network.RetrofitInstance
 import ng.adashi.repository.LoginRepository
 import ng.adashi.utils.DataState
-import ng.adashi.utils.ErrorResponse
-import ng.adashi.utils.Status
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
@@ -41,7 +34,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
-                    showSnackBar(response.error.localizedMessage!!)
+                    showSnackBar("Unknown Error")
                 }
                 is DataState.GenericError -> {
                     displayProgressBar(false)

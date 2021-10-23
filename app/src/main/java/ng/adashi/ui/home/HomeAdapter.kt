@@ -6,7 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import ng.adashi.core.BaseAdapter
 import ng.adashi.databinding.TransactionItemLayoutBinding
-import ng.adashi.models.Transactions
+import ng.adashi.domain_models.Transactions
 
 class HomeAdapter(val click : (vendor: Transactions)->Unit) : BaseAdapter<Transactions>(DiffCallBack()) {
 

@@ -1,14 +1,11 @@
 package ng.adashi.ui.home
 
-import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
-import ng.adashi.databinding.AddSavingsDialogueSheetBinding
 import ng.adashi.databinding.FragmentHomeBinding
-import ng.adashi.models.Transactions
+import ng.adashi.domain_models.Transactions
 import ng.adashi.ui.deposit.DepositBottomSheet
 import ng.adashi.ui.makesavings.AddSavingsBottomSheet
 import ng.adashi.ui.payout.PayoutBottomSheet

@@ -1,6 +1,4 @@
-package ng.adashi.models.login
-
-import com.squareup.moshi.Json
+package ng.adashi.domain_models.login
 
 data class LoginDetails(
     val email: String,

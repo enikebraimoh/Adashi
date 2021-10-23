@@ -5,27 +5,17 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import ng.adashi.models.login.LoginDetails
-import ng.adashi.models.login.LoginResponse
-import ng.adashi.models.login.LoginToken
+import ng.adashi.domain_models.login.LoginDetails
+import ng.adashi.domain_models.login.LoginResponse
 import ng.adashi.repository.LoginRepository
 import ng.adashi.utils.DataState
-import ng.adashi.utils.Resource
-import ng.adashi.utils.convertErrorBody
-import retrofit2.HttpException
-import retrofit2.Response
-import java.io.IOException
-import java.lang.Exception
 
 class LoginViewModel(val app: Application, val loginRepository: LoginRepository) : ViewModel() {
 

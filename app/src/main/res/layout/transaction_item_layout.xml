@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="ng.adashi.models.Transactions" />
+            type="ng.adashi.domain_models.Transactions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

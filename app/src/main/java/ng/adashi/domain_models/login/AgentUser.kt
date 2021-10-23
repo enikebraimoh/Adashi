@@ -1,4 +1,4 @@
-package ng.adashi.models.login
+package ng.adashi.domain_models.login
 
 data class AgentUser(
     val Savers: List<String>? = null,

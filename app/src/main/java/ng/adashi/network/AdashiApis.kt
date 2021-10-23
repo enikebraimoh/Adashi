@@ -1,11 +1,9 @@
 package ng.adashi.network
 
 
-import ng.adashi.models.login.LoginDetails
-import ng.adashi.models.login.LoginResponse
-import retrofit2.Response
+import ng.adashi.domain_models.login.LoginDetails
+import ng.adashi.domain_models.login.LoginResponse
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AdashiApis {
