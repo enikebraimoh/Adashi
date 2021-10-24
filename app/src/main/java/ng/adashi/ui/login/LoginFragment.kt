@@ -4,21 +4,23 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
 import ng.adashi.domain_models.login.LoginResponse
-import ng.adashi.network.NetworkDataSource
-import ng.adashi.network.RetrofitInstance
-import ng.adashi.repository.LoginRepository
+import ng.adashi.network.NetworkDataSourceImpl
+import ng.adashi.repository.AuthRepository
 import ng.adashi.utils.DataState
+import ng.adashi.utils.Utils
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     override fun start() {
         val application = requireNotNull(this.activity).application
-        val network = NetworkDataSource(RetrofitInstance)
-        val viewModelProviderFactory = LoginFactory(application, LoginRepository(network))
+        val network = NetworkDataSourceImpl()
+        val viewModelProviderFactory = LoginFactory(application, AuthRepository(network))
 
         val viewModel = ViewModelProvider(
             requireActivity(),
@@ -30,15 +32,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             when (response) {
                 is DataState.Success<LoginResponse> -> {
                     displayProgressBar(false)
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(response.data.data.user?.firstName!!))
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
-                    showSnackBar("Unknown Error")
+                    showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
                     displayProgressBar(false)
-                  showSnackBar(response.error?.message!!)
+                    showSnackBar(response.error?.message!!)
                 }
                 DataState.Loading -> {
                     displayProgressBar(true)
@@ -52,14 +54,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     }
 
     private fun displayProgressBar(isLoading: Boolean) {
-        when (isLoading){
-            true ->{
+        when (isLoading) {
+            true -> {
                 binding.spinKit.visibility = View.VISIBLE
                 binding.loginButton.visibility = View.INVISIBLE
                 binding.emailField.isEnabled = false
                 binding.passwordField.isEnabled = false
             }
-            false ->{
+            false -> {
                 binding.spinKit.visibility = View.INVISIBLE
                 binding.loginButton.visibility = View.VISIBLE
                 binding.emailField.isEnabled = true

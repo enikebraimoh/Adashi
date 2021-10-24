@@ -60,8 +60,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="ng.adashi.ui.home.homeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/agent_name"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="AgentName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/saversFragment"
         android:name="ng.adashi.ui.savers.SaversFragment"

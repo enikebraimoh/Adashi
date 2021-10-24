@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when (destination.id) {
                 R.id.homeFragment -> {
                     supportActionBar?.show()
-                    binding.toolbar.title = "Good Morning 👋🏽"
+                    //binding.toolbar.title = "Good Morning 👋🏽"
+                    binding.toolbar.setTitleTextAppearance(this,R.style.TextAppearance_AppCompat_Title)
                     binding.toolbar.setNavigationIcon(R.drawable.ic_menu)
                     drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }

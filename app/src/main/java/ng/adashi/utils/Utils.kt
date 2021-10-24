@@ -6,15 +6,16 @@ import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import ng.adashi.domain_models.login.LoginResponse
 
 class Utils {
 
     class LoginState(context: Context) {
-        private val accessToken = context.createDataStore("token_key")
+        private val data = context.createDataStore("login_response")
         private val login = context.createDataStore("login_key")
 
         companion object {
-            val TOKEN = preferencesKey<String>("token_value")
+            val DATA = preferencesKey<LoginResponse>("data_value")
             val LOGIN_STATE = preferencesKey<Boolean>("state_value")
         }
 
@@ -23,16 +24,17 @@ class Utils {
                 it[LOGIN_STATE] = login_state
             }
         }
-        suspend fun saveAccessToken(token_value: String) {
-            accessToken.edit {
-                it[TOKEN] = token_value
+        suspend fun saveAccessToken(data_value: LoginResponse) {
+            data.edit {
+                it[DATA] = data_value
             }
         }
 
         val loginStateFlow: Flow<Boolean> = login.data.map {
             it[LOGIN_STATE] ?: false
         }
-        val tokenStateFlow: Flow<Boolean> = accessToken.data.map {
+
+        val tokenStateFlow: Flow<Boolean> = data.data.map {
             it[LOGIN_STATE] ?: false
         }
 

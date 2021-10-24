@@ -1,4 +1,4 @@
-package ng.adashi.network
+package ng.adashi.network.retrofit
 
 
 import ng.adashi.domain_models.login.LoginDetails

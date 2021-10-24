@@ -5,19 +5,22 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.domain_models.login.LoginResponse
-import ng.adashi.repository.LoginRepository
+import ng.adashi.repository.AuthRepository
 import ng.adashi.utils.DataState
+import ng.adashi.utils.Utils
 
-class LoginViewModel(val app: Application, val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(val app: Application, val authRepository: AuthRepository) : ViewModel() {
 
     var email: String? = null
     var password: String? = null
@@ -31,6 +34,9 @@ class LoginViewModel(val app: Application, val loginRepository: LoginRepository)
     private val _emailError = MutableLiveData<String>()
     val emailError: LiveData<String> get() = _emailError
 
+    private val _loginState = MutableLiveData<Boolean>()
+    val loginState: LiveData<Boolean> get() = _loginState
+
     fun login() {
         if (verifyEmail()) {
             if (verifyPassword()) {
@@ -39,13 +45,27 @@ class LoginViewModel(val app: Application, val loginRepository: LoginRepository)
         }
     }
 
-    //call the function from the repository
+    fun checkLoginState(datastate: DataState<LoginResponse>) {
+        val state = Utils.LoginState(app.applicationContext)
+        when (datastate) {
+            is DataState.Success -> {
+                viewModelScope.launch {
+                    state.saveLoginState(true)
+                    state.saveAccessToken(datastate.data)
+                    _loginState.value = true
+                }
+            }
+        }
+
+    }
+
+    //call the login function from the repository
     fun logUsersIn(login: LoginDetails) {
         viewModelScope.launch {
-            loginRepository.LogUserIn(login).onEach { state ->
+            authRepository.LogUserNewIn(login).onEach { state ->
+               // checkLoginState(state)
                 _login.value = state
             }.launchIn(viewModelScope)
-
         }
     }
 
@@ -66,10 +86,10 @@ class LoginViewModel(val app: Application, val loginRepository: LoginRepository)
         return if (password == null || password == "") {
             _passwordError.value = "Password field cannot be blank"
             false
-        }else if (password!!.length < 6) {
+        } else if (password!!.length < 6) {
             _passwordError.value = "Password field must have at least 6 characters"
             false
-        }  else {
+        } else {
             _passwordError.value = null
             true
         }
