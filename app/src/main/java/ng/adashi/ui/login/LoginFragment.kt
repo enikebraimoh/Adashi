@@ -32,6 +32,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             when (response) {
                 is DataState.Success<LoginResponse> -> {
                     displayProgressBar(false)
+                    checkLoginState(response.data)
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(response.data.data.user?.firstName!!))
                 }
                 is DataState.Error -> {
@@ -39,6 +40,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
+                    if ()
                     displayProgressBar(false)
                     showSnackBar(response.error?.message!!)
                 }
@@ -48,6 +50,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         })
     }
+
+    fun checkLoginState(datastate: LoginResponse) {
+        val state = Utils.LoginState(requireContext().applicationContext)
+                GlobalScope.launch {
+                    state.saveLoginState(true)
+                    state.saveAccessToken(datastate)
+            }
+        }
 
     private fun showSnackBar(message: String) {
         Snackbar.make(requireActivity(), binding.root, message, Snackbar.LENGTH_LONG).show()

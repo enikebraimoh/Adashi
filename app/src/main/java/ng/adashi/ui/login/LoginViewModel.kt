@@ -45,26 +45,14 @@ class LoginViewModel(val app: Application, val authRepository: AuthRepository) :
         }
     }
 
-    fun checkLoginState(datastate: DataState<LoginResponse>) {
-        val state = Utils.LoginState(app.applicationContext)
-        when (datastate) {
-            is DataState.Success -> {
-                viewModelScope.launch {
-                    state.saveLoginState(true)
-                    state.saveAccessToken(datastate.data)
-                    _loginState.value = true
-                }
-            }
-        }
 
-    }
 
     //call the login function from the repository
     fun logUsersIn(login: LoginDetails) {
         viewModelScope.launch {
             authRepository.LogUserNewIn(login).onEach { state ->
-               // checkLoginState(state)
                 _login.value = state
+               // checkLoginState(state)
             }.launchIn(viewModelScope)
         }
     }
