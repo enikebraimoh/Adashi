@@ -17,6 +17,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import ng.adashi.databinding.ActivityMainBinding
+import ng.adashi.utils.App
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // This is to find my NavHost Fragment
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
         // initialized drawer binding
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
-        return item.onNavDestinationSelected(findNavController(R.id.fragmentContainerView2)) || super.onOptionsItemSelected(item)
+        return item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment_container)) || super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {

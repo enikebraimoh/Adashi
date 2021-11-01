@@ -8,14 +8,19 @@
         <entry key="app/src/main/res/drawable-v24/rounded.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable-v24/transaction_type.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/cornercircle.xml" value="0.27037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_icon.xml" value="0.22314814814814815" />
         <entry key="app/src/main/res/drawable/ic_deposit_icon.xml" value="0.2611111111111111" />
+        <entry key="app/src/main/res/drawable/ic_home_icon.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/ic_savings_icon.xml" value="0.22314814814814815" />
+        <entry key="app/src/main/res/drawable/ic_settings_icon.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/ic_transactions_icon.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/drawable/quick_actions_bg.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/drawable/total_balance_bg.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/drawable/transaction_bg.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_savings_dialogue_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/deposit_dialogue_sheet.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.28125" />

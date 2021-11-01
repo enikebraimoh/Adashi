@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="data"
+            type="ng.adashi.ui.home.HomeViewModel" />
 
     </data>
 
