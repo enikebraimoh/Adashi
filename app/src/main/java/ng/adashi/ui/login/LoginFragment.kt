@@ -11,6 +11,7 @@ import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
 import ng.adashi.domain_models.login.LoginResponse
 import ng.adashi.network.NetworkDataSourceImpl
+import ng.adashi.network.SessionManager
 import ng.adashi.repository.AuthRepository
 import ng.adashi.utils.DataState
 import ng.adashi.utils.Utils
@@ -20,27 +21,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun start() {
         val application = requireNotNull(this.activity).application
         val network = NetworkDataSourceImpl()
+        val sessions = SessionManager(requireContext())
         val viewModelProviderFactory = LoginFactory(application, AuthRepository(network))
 
         val viewModel = ViewModelProvider(
             requireActivity(),
             viewModelProviderFactory
         ).get(LoginViewModel::class.java)
+
         binding.data = viewModel
         binding.lifecycleOwner = this
         viewModel.login.observe(this, { response ->
             when (response) {
                 is DataState.Success<LoginResponse> -> {
                     displayProgressBar(false)
-                    checkLoginState(response.data)
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(response.data.data.user?.firstName!!))
+                    sessions.saveAuthToken(response.data.data.accessToken)
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment((response.data.data.user?.firstName!!)))
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
-                    if ()
                     displayProgressBar(false)
                     showSnackBar(response.error?.message!!)
                 }
@@ -50,14 +52,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         })
     }
-
-    fun checkLoginState(datastate: LoginResponse) {
-        val state = Utils.LoginState(requireContext().applicationContext)
-                GlobalScope.launch {
-                    state.saveLoginState(true)
-                    state.saveAccessToken(datastate)
-            }
-        }
 
     private fun showSnackBar(message: String) {
         Snackbar.make(requireActivity(), binding.root, message, Snackbar.LENGTH_LONG).show()

@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.domain_models.login.LoginResponse
+import ng.adashi.network.SessionManager
 import ng.adashi.repository.AuthRepository
 import ng.adashi.utils.DataState
 import ng.adashi.utils.Utils
@@ -34,9 +35,6 @@ class LoginViewModel(val app: Application, val authRepository: AuthRepository) :
     private val _emailError = MutableLiveData<String>()
     val emailError: LiveData<String> get() = _emailError
 
-    private val _loginState = MutableLiveData<Boolean>()
-    val loginState: LiveData<Boolean> get() = _loginState
-
     fun login() {
         if (verifyEmail()) {
             if (verifyPassword()) {
@@ -45,14 +43,11 @@ class LoginViewModel(val app: Application, val authRepository: AuthRepository) :
         }
     }
 
-
-
     //call the login function from the repository
     fun logUsersIn(login: LoginDetails) {
         viewModelScope.launch {
             authRepository.LogUserNewIn(login).onEach { state ->
                 _login.value = state
-               // checkLoginState(state)
             }.launchIn(viewModelScope)
         }
     }
