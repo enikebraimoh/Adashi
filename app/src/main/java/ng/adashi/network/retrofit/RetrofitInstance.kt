@@ -1,8 +1,6 @@
 package ng.adashi.network.retrofit
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import ng.adashi.network.AuthInterseptor
+import ng.adashi.network.TokenInterceptor
 import ng.adashi.utils.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,9 +9,8 @@ import okhttp3.OkHttpClient
 object RetrofitInstance {
 
     private var client = OkHttpClient.Builder().apply {
-        addInterceptor(AuthInterseptor())
+        addInterceptor(TokenInterceptor())
     }.build()
-
 
     private val retrofit by lazy {
         Retrofit.Builder()
@@ -23,7 +20,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val Api: AdashiApis by lazy {
+    val api: AdashiApis by lazy {
         retrofit.create(AdashiApis::class.java)
     }
 
