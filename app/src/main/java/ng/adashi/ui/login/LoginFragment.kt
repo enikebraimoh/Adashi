@@ -29,6 +29,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             viewModelProviderFactory
         ).get(LoginViewModel::class.java)
 
+        binding.loginButton.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(("demo person")))
+        }
+
         binding.data = viewModel
         binding.lifecycleOwner = this
         viewModel.login.observe(this, { response ->

@@ -64,6 +64,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
 
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.38.1"
+
     //3rd party libraries
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
