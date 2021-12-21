@@ -15,7 +15,7 @@ class SplashScreenFragment : BaseFullScreenFragment<FragmentSplashScreenBinding>
 
         if (!App.token.isNullOrEmpty()){
             Toast.makeText(requireContext(),App.token,Toast.LENGTH_SHORT).show()
-            findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment("Eni"))
+            findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment())
         }else{
             Handler().postDelayed({
                 findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToWelcomeFragment())

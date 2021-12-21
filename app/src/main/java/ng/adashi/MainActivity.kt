@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -16,19 +17,27 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import ng.adashi.databinding.ActivityMainBinding
+import ng.adashi.network.SessionManager
 import ng.adashi.utils.App
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     lateinit var binding : ActivityMainBinding
     lateinit var navController: NavController
     lateinit var drawer : DrawerLayout
     lateinit var appBarConfiguration: AppBarConfiguration
+    @Inject lateinit var sessions : SessionManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        App.token = sessions.fetchAuthToken()
+
 
         // data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)

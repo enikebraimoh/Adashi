@@ -10,10 +10,13 @@ import ng.adashi.utils.DataState
 import ng.adashi.utils.convertErrorBody
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class HomeRepository(private val networkDataSource: NetworkDataSource) {
+class HomeRepository
+@Inject
+constructor(private val networkDataSource: NetworkDataSource) {
 
-    suspend fun getWalletAgentDetails (wallet_id: String) : Flow<DataState<AgentWalletResponse>> = flow {
+     fun getWalletAgentDetails (wallet_id: String) : Flow<DataState<AgentWalletResponse>> = flow {
         emit(DataState.Loading)
         try {
             val response = networkDataSource.GetWallet(wallet_id)

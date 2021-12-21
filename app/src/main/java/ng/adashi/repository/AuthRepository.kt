@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.domain_models.login.LoginResponse
+import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.network.NetworkDataSource
 import ng.adashi.network.NetworkDataSourceImpl
 import ng.adashi.network.SessionManager
@@ -14,16 +15,19 @@ import ng.adashi.utils.DataState
 import ng.adashi.utils.convertErrorBody
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class AuthRepository (private val networkDataSource: NetworkDataSource) {
+class AuthRepository
+@Inject
+constructor(private val networkDataSource: NetworkDataSource) {
 
-    suspend fun LogUserNewIn (loginDetails: LoginDetails) : Flow<DataState<LoginResponse>> = flow {
+     fun LogUserNewIn(loginDetails: LoginDetails): Flow<DataState<LoginToken>> = flow {
         emit(DataState.Loading)
         try {
             val response = networkDataSource.login(loginDetails)
-            emit(DataState.Success(response))
-        } catch (e: Exception) {
-            when (e){
+            emit(DataState.Success(response.data))
+        } catch (e: Throwable) {
+            when (e) {
                 is IOException -> emit(DataState.Error(e))
                 is HttpException -> {
                     val status = e.code()
@@ -33,8 +37,6 @@ class AuthRepository (private val networkDataSource: NetworkDataSource) {
             }
         }
     }
-
-
 
 
 }

@@ -50,10 +50,7 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/fade_in"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_signup"
@@ -64,10 +61,9 @@
         android:id="@+id/homeFragment"
         android:name="ng.adashi.ui.home.homeFragment"
         android:label="@string/agent_name">
-        <argument
-            android:name="AgentName"
-            app:argType="string"
-            app:nullable="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/saversFragment"

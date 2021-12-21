@@ -1,46 +1,71 @@
 package ng.adashi.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentLoginBinding
 import ng.adashi.domain_models.login.LoginResponse
+import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.network.NetworkDataSourceImpl
 import ng.adashi.network.SessionManager
 import ng.adashi.repository.AuthRepository
 import ng.adashi.utils.DataState
 import ng.adashi.utils.Utils
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     override fun start() {
-        val application = requireNotNull(this.activity).application
-        val network = NetworkDataSourceImpl()
-        val sessions = SessionManager(requireContext())
-        val viewModelProviderFactory = LoginFactory(application, AuthRepository(network))
 
-        val viewModel = ViewModelProvider(
-            requireActivity(),
-            viewModelProviderFactory
-        ).get(LoginViewModel::class.java)
+        Log.d("ERRR","in login fragment")
 
-        binding.loginButton.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(("demo person")))
+        val viewModel : LoginViewModel by viewModels()
+
+        var prefs: SharedPreferences = requireContext().getSharedPreferences(
+            requireContext().getString(R.string.app_name),
+            Context.MODE_PRIVATE
+        )
+
+        val state = prefs.getBoolean(SessionManager.LOGINSTATE, false)
+        if (state) {
+            viewModel.navigate()
         }
+
+        viewModel.navigateToDashboard.observe(this, {
+            if (it) {
+                val editor = prefs.edit()
+                editor.putBoolean(SessionManager.LOGINSTATE, true)
+                editor.apply()
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                viewModel.navigationDone()
+            }
+        })
 
         binding.data = viewModel
         binding.lifecycleOwner = this
+
         viewModel.login.observe(this, { response ->
             when (response) {
-                is DataState.Success<LoginResponse> -> {
+                is DataState.Success<LoginToken> -> {
                     displayProgressBar(false)
-                    sessions.saveAuthToken(response.data.data.accessToken)
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment((response.data.data.user?.firstName!!)))
+                    Toast.makeText(requireContext(), "logged in", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)

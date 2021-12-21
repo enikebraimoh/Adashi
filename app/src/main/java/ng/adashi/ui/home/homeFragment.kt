@@ -1,30 +1,27 @@
 package ng.adashi.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.*
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentHomeBinding
 import ng.adashi.domain_models.Transactions
-import ng.adashi.domain_models.login.LoginResponse
-import ng.adashi.network.NetworkDataSourceImpl
 import ng.adashi.network.SessionManager
-import ng.adashi.repository.AuthRepository
-import ng.adashi.repository.HomeRepository
 import ng.adashi.ui.deposit.DepositBottomSheet
 import ng.adashi.ui.home.models.AgentWalletResponse
-import ng.adashi.ui.login.LoginFactory
-import ng.adashi.ui.login.LoginFragmentDirections
-import ng.adashi.ui.login.LoginViewModel
 import ng.adashi.ui.makesavings.AddSavingsBottomSheet
 import ng.adashi.ui.payout.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 import ng.adashi.utils.DataState
 
 class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -42,15 +39,18 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun start() {
-        setHasOptionsMenu(true)
 
-        val application = requireNotNull(this.activity).application
-        val network = NetworkDataSourceImpl()
+        val viewModel : HomeViewModel by viewModels()
+        //setHasOptionsMenu(true)
+
+        Log.d("ERRR","in home fragment")
+
+        var prefs: SharedPreferences = requireContext().getSharedPreferences(
+            requireContext().getString(R.string.app_name),
+            Context.MODE_PRIVATE
+        )
+
         val sessions = SessionManager(requireContext())
-        val viewModelProviderFactory = HomeViewModelFactory(application, HomeRepository(network))
-
-        val viewModel = ViewModelProvider(
-            requireActivity(), viewModelProviderFactory).get(HomeViewModel::class.java)
 
         binding.data = viewModel
 
@@ -69,7 +69,7 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 is DataState.GenericError -> {
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
                         sessions.clearAuthToken()
-                        findNavController().popBackStack()
+                        findNavController().navigate(homeFragmentDirections.actionHomeFragmentToLoginFragment())
                     }else{
                         showSnackBar(response.error?.message!!)
                     }
@@ -79,16 +79,6 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
             }
         })
-
-        // fake data
-        var listData = mutableListOf<Transactions>(
-            Transactions(44),
-            Transactions(44),
-            Transactions(44),
-            Transactions(44)
-        )
-
-        initAdapter(listData)
 
         binding.savings.setOnClickListener {
             viewModel.getWalletDetails("6174be37175974f7ca2f3336")
