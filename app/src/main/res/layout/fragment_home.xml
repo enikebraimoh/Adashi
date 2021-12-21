@@ -10,11 +10,39 @@
 
     </data>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:colorBackground"
         tools:context=".ui.home.homeFragment">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/agent_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_profile_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -29,61 +57,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_margin="20dp"
+                    app:cardBackgroundColor="@color/primaryColor"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="20dp">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/abstract_bg_green" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewpager"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Total Balance"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            app:layout_constraintBottom_toTopOf="@+id/acount_balance"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/textView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Get summary of your online transactions here."
-                            android:textColor="@color/white"
-                            android:textSize="13sp"
-                            app:layout_constraintStart_toStartOf="@+id/textView5"
-                            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-                        <TextView
-                            android:id="@+id/acount_balance"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
-                            android:inputType="numberDecimal"
-                            android:text="NGN 13,249,300"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textColor="#FFCE00"
-                            android:textSize="35sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/textView5"
-                            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.viewpager2.widget.ViewPager2>
 
                 </androidx.cardview.widget.CardView>
 
@@ -301,5 +285,5 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>

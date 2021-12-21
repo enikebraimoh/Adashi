@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/gb1" android:checkableBehavior="single">
     <item
         android:id="@+id/homeFragment"
         android:title="Dashboard"
         android:enabled="true"
         android:icon="@drawable/ic_dashboard_icon" />
-    </group>
-    <group android:id="@+id/gb2" android:checkableBehavior="single">
         <item
             android:id="@+id/saversFragment"
             android:title="Savers"
             android:enabled="true"
             android:icon="@drawable/ic_savers_icon" />
-    </group>
-
-    <group android:id="@+id/gb3" android:checkableBehavior="single">
     <item
         android:id="@+id/transactionsFragment"
         android:title="Transactions"
         android:enabled="true"
-        android:icon="@drawable/ic_transactions_icon"/>
-    </group>
-    <group android:id="@+id/gb4" android:checkableBehavior="single">
+        android:icon="@drawable/ic_transacctions"/>
     <item
         android:id="@+id/moreFragment"
         android:title="Settings"
         android:enabled="true"
-        android:icon="@drawable/ic_settings_icon"/>
-    </group>
-
+        android:icon="@drawable/ic_setting"/>
 </menu>
