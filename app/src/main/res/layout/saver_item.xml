@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="ng.adashi.ui.savers.models.Saver" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/margin_20_dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{data.firstName}"
+            tools:text="Musa umar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/saver_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@{data.saverId}"
+            app:layout_constraintBottom_toTopOf="@+id/phone_number"
+            app:layout_constraintEnd_toStartOf="@+id/withdrawal_date"
+            app:layout_constraintStart_toEndOf="@+id/name"
+            app:layout_constraintTop_toTopOf="@+id/name"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="AD-SV7OTHYR7Q" />
+
+        <TextView
+            android:id="@+id/phone_number"
+            long_to_string="@{data.phone}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
+            app:layout_constraintStart_toStartOf="@+id/saver_id"
+            app:layout_constraintTop_toBottomOf="@+id/saver_id"
+            tools:text="090123456789" />
+
+        <TextView
+            android:id="@+id/withdrawal_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@{data.state}"
+            app:layout_constraintBottom_toTopOf="@+id/price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/saver_id"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="29.Oct.2021" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="₦ 3000"
+            get_saver_balance="@{data.wallet}"
+            android:fontFamily="@font/inter_semibold"
+            app:layout_constraintBottom_toBottomOf="@+id/phone_number"
+            app:layout_constraintEnd_toEndOf="@+id/withdrawal_date"
+            app:layout_constraintTop_toBottomOf="@+id/withdrawal_date" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
