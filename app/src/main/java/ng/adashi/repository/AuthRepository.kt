@@ -25,7 +25,7 @@ constructor(private val networkDataSource: NetworkDataSource) {
         emit(DataState.Loading)
         try {
             val response = networkDataSource.login(loginDetails)
-            emit(DataState.Success(response.data))
+            emit(DataState.Success(response))
         } catch (e: Throwable) {
             when (e) {
                 is IOException -> emit(DataState.Error(e))
