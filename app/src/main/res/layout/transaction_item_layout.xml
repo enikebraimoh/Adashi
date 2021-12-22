@@ -10,11 +10,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginEnd="@dimen/margin_10_dp"
-        android:layout_marginStart="@dimen/margin_10_dp"
         android:padding="@dimen/margin_10_dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/transaction_bg"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_regular"
             android:text="@{data.createdAt}"
             tools:text="Today Aug. 21, 2021 (2:00PM)"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,28 +30,16 @@
             app:layout_constraintTop_toBottomOf="@+id/withdrawal" />
 
         <TextView
+            android:layout_marginStart="@dimen/margin_20_dp"
             android:id="@+id/withdrawal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/inter_medium"
             android:text="@{data.reference}"
             tools:text="Savings"
             app:layout_constraintBottom_toTopOf="@+id/date_and_time"
-            app:layout_constraintEnd_toStartOf="@+id/ammount"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/ammount"
-            android:background="@drawable/transaction_type"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/successful"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toEndOf="@+id/date_and_time"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -60,13 +47,13 @@
             android:id="@+id/successful"
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/margin_20_dp"
             android:layout_height="wrap_content"
             tools:text="-2,0000"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/inter_semibold"
             currency_converter="@{data.amount}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ammount" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

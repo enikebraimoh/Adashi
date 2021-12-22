@@ -9,7 +9,7 @@ import ng.adashi.databinding.TransactionItemLayoutBinding
 import ng.adashi.domain_models.Transactions
 import ng.adashi.ui.home.models.transactions.Transaction
 
-class HomeAdapter(val click : (vendor: Transactions)->Unit) : BaseAdapter<Transaction>(DiffCallBack()) {
+class TransactonsAdapter(val click : (vendor: Transactions)->Unit) : BaseAdapter<Transaction>(DiffCallBack()) {
 
     override fun createBinding(parent: ViewGroup, viewType: Int): ViewDataBinding {
         val view = TransactionItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
