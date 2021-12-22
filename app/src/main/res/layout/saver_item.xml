@@ -13,9 +13,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:paddingTop="20dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:paddingBottom="@dimen/margin_20_dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="wrap_content">
 
 
         <TextView

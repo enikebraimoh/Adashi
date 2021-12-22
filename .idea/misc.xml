@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/drawable/ic_transacctions.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/drawable/ic_transactions_icon.xml" value="0.28703703703703703" />
         <entry key="app/src/main/res/drawable/quick_actions_bg.xml" value="0.24351851851851852" />
+        <entry key="app/src/main/res/drawable/rounded_gray_background.xml" value="0.30666666666666664" />
         <entry key="app/src/main/res/drawable/savers_search_bg.xml" value="0.2851851851851852" />
         <entry key="app/src/main/res/drawable/total_balance_bg.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/drawable/transaction_bg.xml" value="0.2611111111111111" />

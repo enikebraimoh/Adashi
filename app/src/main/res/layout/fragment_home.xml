@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_bold"
                     android:text="Quick Actions"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -274,7 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_bold"
                     android:text="Recent Transactions"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
                     app:layout_constraintTop_toBottomOf="@+id/quick_actions_scrollview" />
