@@ -3,8 +3,8 @@ package ng.adashi.ui.home
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -15,50 +15,41 @@ import ng.adashi.databinding.FragmentHomeBinding
 import ng.adashi.domain_models.Transactions
 import ng.adashi.network.SessionManager
 import ng.adashi.ui.deposit.DepositBottomSheet
-import ng.adashi.ui.home.models.AgentWalletResponse
+import ng.adashi.ui.home.models.transactions.Data
+import ng.adashi.ui.home.models.transactions.Transaction
+import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.ui.makesavings.AddSavingsBottomSheet
 import ng.adashi.ui.payout.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 import ng.adashi.utils.DataState
+import javax.inject.Inject
 
-class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.tool_bar_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.toolbar_menu -> {
-                findNavController().navigate(R.id.notificationsFragment)
-                true
-            }
-            else -> false
-        }
-    }
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun start() {
 
-        val viewModel : HomeViewModel by viewModels()
-        //setHasOptionsMenu(true)
-
         Log.d("ERRR","in home fragment")
+
+        val viewModel : HomeViewModel by viewModels()
+
+        binding.data = viewModel
+        binding.lifecycleOwner = this
 
         var prefs: SharedPreferences = requireContext().getSharedPreferences(
             requireContext().getString(R.string.app_name),
             Context.MODE_PRIVATE
         )
 
+        val agent_name = prefs.getString(SessionManager.AGENT_FIRST_NAME, "name")
+        binding.agentname.text = getString(R.string.agent_name, agent_name)
+
         val sessions = SessionManager(requireContext())
 
-        binding.data = viewModel
-
-        binding.lifecycleOwner = this
-        viewModel.wallet_ballance.observe(this, { response ->
+        viewModel.transactions.observe(this, { response ->
             when (response) {
-                is DataState.Success<AgentWalletResponse> -> {
-                    showSnackBar(response.data.data.balance.toString())
+                is DataState.Success<Data> -> {
+                    initAdapter(response.data.transactions)
                 }
                 is DataState.Error -> {
                     if (!response.error.localizedMessage.isNullOrEmpty()){
@@ -69,19 +60,20 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 is DataState.GenericError -> {
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
                         sessions.clearAuthToken()
-                        findNavController().navigate(homeFragmentDirections.actionHomeFragmentToLoginFragment())
+                        Toast.makeText(requireContext(), "login.. you have been idle for a while", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
                     }else{
                         showSnackBar(response.error?.message!!)
                     }
                 }
                 DataState.Loading -> {
-                    showSnackBar("loading..")
+                   // showSnackBar("loading..")
                 }
             }
         })
 
+
         binding.savings.setOnClickListener {
-            viewModel.getWalletDetails("6174be37175974f7ca2f3336")
             val BS = AddSavingsBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
 
@@ -95,25 +87,36 @@ class homeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             val BS = DepositBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
             findNavController().popBackStack()
-
         }
         binding.payout.setOnClickListener {
             val BS = WithdrawBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
-
-
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                /**
+                 *
+                 *  Callback for handling the [OnBackPressedDispatcher.onBackPressed] event.
+                 *
+                 */
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
 
 
     }
 
-    private fun initAdapter(data: MutableList<Transactions>) {
+    private fun initAdapter(data: MutableList<Transaction>) {
 
         val adapter = HomeAdapter {
 
         }
 
-        binding.recyclerView .adapter = adapter
+        binding.recyclerView.adapter = adapter
         adapter.submitList(data)
 
     }

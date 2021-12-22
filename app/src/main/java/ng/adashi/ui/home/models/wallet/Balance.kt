@@ -1,4 +1,4 @@
-package ng.adashi.ui.home.models
+package ng.adashi.ui.home.models.wallet
 
 data class Balance(
     val balance: Int,

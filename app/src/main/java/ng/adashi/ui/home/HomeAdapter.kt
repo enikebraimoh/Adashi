@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import ng.adashi.core.BaseAdapter
 import ng.adashi.databinding.TransactionItemLayoutBinding
 import ng.adashi.domain_models.Transactions
+import ng.adashi.ui.home.models.transactions.Transaction
 
-class HomeAdapter(val click : (vendor: Transactions)->Unit) : BaseAdapter<Transactions>(DiffCallBack()) {
+class HomeAdapter(val click : (vendor: Transactions)->Unit) : BaseAdapter<Transaction>(DiffCallBack()) {
 
     override fun createBinding(parent: ViewGroup, viewType: Int): ViewDataBinding {
         val view = TransactionItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,16 +22,16 @@ class HomeAdapter(val click : (vendor: Transactions)->Unit) : BaseAdapter<Transa
         binding.executePendingBindings()
     }
 
-    class DiffCallBack() : DiffUtil.ItemCallback<Transactions>() {
+    class DiffCallBack() : DiffUtil.ItemCallback<Transaction>() {
         override fun areContentsTheSame(
-            oldItem: Transactions,
-            newItem: Transactions
+            oldItem: Transaction,
+            newItem: Transaction
         ): Boolean = oldItem == newItem
 
         override fun areItemsTheSame(
-            oldItem: Transactions,
-            newItem: Transactions
-        ): Boolean = oldItem.ammount == newItem.ammount
+            oldItem: Transaction,
+            newItem: Transaction
+        ): Boolean = oldItem._id == newItem._id
     }
 
 }

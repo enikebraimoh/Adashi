@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="ng.adashi.domain_models.Transactions" />
+            type="ng.adashi.ui.home.models.transactions.Transaction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            amount="@{data}"
+            android:text="@{data.createdAt}"
             tools:text="Today Aug. 21, 2021 (2:00PM)"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/withdrawal"
@@ -34,8 +34,9 @@
             android:id="@+id/withdrawal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            amount="@{data}"
-            tools:text="Transfer - Enike Braimoh"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@{data.reference}"
+            tools:text="Savings"
             app:layout_constraintBottom_toTopOf="@+id/date_and_time"
             app:layout_constraintEnd_toStartOf="@+id/ammount"
             app:layout_constraintHorizontal_bias="0.1"
@@ -61,7 +62,8 @@
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             tools:text="-2,0000"
-            amount="@{data}"
+            android:fontFamily="@font/poppins_medium"
+            currency_converter="@{data.amount}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ammount" />

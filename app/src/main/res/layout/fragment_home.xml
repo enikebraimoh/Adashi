@@ -15,32 +15,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:colorBackground"
-        tools:context=".ui.home.homeFragment">
+        tools:context=".ui.home.HomeFragment">
 
         <LinearLayout
             android:orientation="horizontal"
             android:background="@color/white"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="wrap_content">
 
             <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_sun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
             <TextView
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:id="@+id/agentname"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/agent_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_profile_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
 
         </LinearLayout>
 

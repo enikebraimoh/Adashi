@@ -1,4 +1,6 @@
-package ng.adashi.ui.home.models
+package ng.adashi.ui.home.models.wallet
+
+import ng.adashi.ui.home.models.wallet.Balance
 
 data class Data(
     val allow_bank_transfer: Boolean,
