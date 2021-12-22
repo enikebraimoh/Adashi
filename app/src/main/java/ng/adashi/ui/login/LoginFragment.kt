@@ -31,25 +31,20 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
+    @Inject lateinit var sessions : SessionManager
+
     override fun start() {
 
         Log.d("ERRR","in login fragment")
 
         val viewModel : LoginViewModel by viewModels()
 
-        var prefs: SharedPreferences = requireContext().getSharedPreferences(
-            requireContext().getString(R.string.app_name),
-            Context.MODE_PRIVATE
-        )
-
-        val state = prefs.getBoolean(SessionManager.LOGINSTATE, false)
-        if (state) {
-            viewModel.navigate()
-        }
+        binding.data = viewModel
+        binding.lifecycleOwner = this
 
         viewModel.navigateToDashboard.observe(this, {
             if (it) {
-                val editor = prefs.edit()
+                val editor = sessions.prefs.edit()
                 editor.putBoolean(SessionManager.LOGINSTATE, true)
                 editor.apply()
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
@@ -57,23 +52,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         })
 
-        binding.data = viewModel
-        binding.lifecycleOwner = this
-
         viewModel.login.observe(this, { response ->
             when (response) {
                 is DataState.Success<LoginToken> -> {
                     displayProgressBar(false)
-                    Toast.makeText(requireContext(), "logged in", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
-                    showSnackBar("Slow or no Internet Connection")
+                    Toast.makeText(requireContext(), "Slow or no Internet Connection", Toast.LENGTH_SHORT).show()
                 }
                 is DataState.GenericError -> {
                     displayProgressBar(false)
-                    showSnackBar(response.error?.message!!)
+                    if (response.code!! >= 500){
+                        showSnackBar("internal server error")
+                    }
+                    else{
+                        showSnackBar(response.error?.message!!)
+                    }
                 }
                 DataState.Loading -> {
                     displayProgressBar(true)

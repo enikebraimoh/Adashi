@@ -62,6 +62,7 @@ constructor(val authRepository: AuthRepository) : ViewModel() {
             when (state) {
                 is DataState.Success<LoginToken> -> {
                     sessions.saveAuthToken(state.data.accessToken)
+                    sessions.saveCurrentAgent(state.data.user)
                     App.token = state.data.accessToken
                     navigate()
                 }
