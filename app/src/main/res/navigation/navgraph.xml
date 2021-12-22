@@ -42,6 +42,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_login"
@@ -58,18 +61,25 @@
         android:name="ng.adashi.ui.signup.SignupFragment"
         android:label="SignupFragment" />
     <fragment
+        tools:layout="@layout/fragment_home"
         android:id="@+id/homeFragment"
-        android:name="ng.adashi.ui.home.homeFragment"
+        android:name="ng.adashi.ui.home.HomeFragment"
         android:label="@string/agent_name">
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/saversFragment"
         android:name="ng.adashi.ui.savers.SaversFragment"
         android:label="fragment_savers"
-        tools:layout="@layout/fragment_savers" />
+        tools:layout="@layout/fragment_savers" >
+        <action
+            android:id="@+id/action_saversFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
         android:name="ng.adashi.ui.transactions.TransactionsFragment"
