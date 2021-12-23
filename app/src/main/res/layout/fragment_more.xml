@@ -77,7 +77,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_profile" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_savers_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_coolicon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_password" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_unlock" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_calling" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -271,7 +271,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_shield_done" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -310,7 +310,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_dashboard_icon" />
+                            android:src="@drawable/ic_logout" />
 
                         <TextView
                             android:layout_width="wrap_content"
