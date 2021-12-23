@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/inter_medium"
             android:text="Login to your account \nhere"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
             android:textSize="20sp"
@@ -52,7 +52,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/inter_regular"
             android:hint="Email Address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
                 android:text="@={data.email}"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/inter_regular"
                 android:padding="20dp"
                 android:singleLine="true" />
 
@@ -79,7 +79,7 @@
             android:layout_marginTop="16dp"
             verify_field="@{data.passwordError}"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/inter_regular"
             android:hint="Password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:padding="20dp"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/inter_regular"
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/inter_medium"
             android:text="Forget password?"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_field" />
@@ -128,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/inter_medium"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:padding="18dp"
@@ -145,7 +145,7 @@
         <TextView
             android:id="@+id/register"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/inter_medium"
             android:layout_height="wrap_content"
             android:text="Don’t have an account? \nSign up here"
             android:textAlignment="center"

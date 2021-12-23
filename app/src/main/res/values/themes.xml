@@ -18,7 +18,7 @@
 
     <!--- bottom sheet design style -->
 
-    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+    <style name="BottomSheet" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="android:typeface">monospace</item>
         <item name="android:background">@drawable/cornercircle</item>
     </style>
