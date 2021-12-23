@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:background="@color/white"
+            android:background="?android:colorBackground"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -289,6 +289,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recent_transactions"
                     tools:listitem="@layout/transaction_item_layout" />
+
+                <TextView
+                    android:background="@drawable/rounded_gray_background"
+                    android:id="@+id/viewmore"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="View More"
+                    android:visibility="gone"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textStyle="italic"
+                    android:fontFamily="@font/inter_regular"
+                    android:layout_margin="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,6 +3,7 @@ package ng.adashi.ui.home
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
@@ -48,6 +49,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             when (response) {
                 is DataState.Success<Data> -> {
                     initAdapter(response.data.transactions)
+                    binding.viewmore.visibility = View.VISIBLE
                 }
                 is DataState.Error -> {
                     if (!response.error.localizedMessage.isNullOrEmpty()){
@@ -70,6 +72,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         })
 
+        binding.viewmore.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
+        }
+
 
         binding.savings.setOnClickListener {
             val BS = AddSavingsBottomSheet()
@@ -84,7 +90,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.withdrawal.setOnClickListener {
             val BS = DepositBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
-            findNavController().popBackStack()
         }
         binding.payout.setOnClickListener {
             val BS = WithdrawBottomSheet()
@@ -122,7 +127,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
         binding.recyclerView.adapter = adapter
-        adapter.submitList(data)
+        val newData = data.slice(0..4)
+        adapter.submitList(newData)
 
     }
 
