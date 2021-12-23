@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:padding="10dp"
-        android:backgroundTint="?android:colorBackground"
+        android:background="@drawable/cornercircle"
         android:layout_height="wrap_content">
 
         <FrameLayout
@@ -20,129 +20,82 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="5dp" />
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/fundaccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Payout"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Fund your account"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bar" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/amount_field"
-            android:focusable="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/bank_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Amount"
+            android:padding="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/adashi_text"
+            android:background="@drawable/rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login">
+            app:layout_constraintTop_toBottomOf="@+id/fundaccount">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amount"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/bankname"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:fontFamily="@font/poppins_regular"
-                android:padding="15dp"
-                android:singleLine="true" />
+                android:text="Wema bank"
+                android:fontFamily="@font/inter_semibold"
+                app:layout_constraintBottom_toTopOf="@+id/bankAcountNumber"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Account_id_field"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Account ID"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/amount_field">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Account_id"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/bankAcountNumber"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:fontFamily="@font/poppins_regular"
-                android:padding="15dp"
-                android:singleLine="true" />
+                android:text="0261276924"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bankname" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Copy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/account_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Enike Richard Braimoh"
-            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-            android:textColor="@color/primaryColor"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/Account_id_field"
-            app:layout_constraintTop_toBottomOf="@+id/Account_id_field" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pin_field"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:id="@+id/adashi_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Four Digit Pin"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="@dimen/margin_10_dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/agent_text"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/account_name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:inputType="number"
-                android:padding="15dp"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:backgroundTint="@color/primaryColor"
-            android:id="@+id/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="18dp"
-            android:text="Login"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pin_field" />
+            app:layout_constraintTop_toBottomOf="@+id/bank_layout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
