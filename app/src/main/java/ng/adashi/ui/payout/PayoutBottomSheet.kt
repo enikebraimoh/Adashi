@@ -24,10 +24,6 @@ class PayoutBottomSheet : RoundedBottomSheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loginButton.setOnClickListener {
-            val ss = SuccessDialogue(requireActivity())
-            dismiss()
-            ss.show()
-        }
+
     }
 }

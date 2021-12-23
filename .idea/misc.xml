@@ -8,15 +8,23 @@
         <entry key="app/src/main/res/drawable-v24/rounded.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable-v24/transaction_type.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/cornercircle.xml" value="0.27037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_calling.xml" value="0.31145833333333334" />
+        <entry key="app/src/main/res/drawable/ic_coolicon.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/ic_dashboard_icon.xml" value="0.22314814814814815" />
         <entry key="app/src/main/res/drawable/ic_deposit_icon.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/ic_home_icon.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.30666666666666664" />
+        <entry key="app/src/main/res/drawable/ic_password.xml" value="0.31145833333333334" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/ic_savers.xml" value="0.262037037037037" />
+        <entry key="app/src/main/res/drawable/ic_savers_icon.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/ic_savings_icon.xml" value="0.22314814814814815" />
         <entry key="app/src/main/res/drawable/ic_setting.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/drawable/ic_settings_icon.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/ic_shield_done.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/ic_transacctions.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/drawable/ic_transactions_icon.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/ic_unlock.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/quick_actions_bg.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/drawable/rounded_gray_background.xml" value="0.30666666666666664" />
         <entry key="app/src/main/res/drawable/savers_search_bg.xml" value="0.2851851851851852" />
@@ -35,7 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
         <entry key="app/src/main/res/layout/header_nav.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/payout_dialogue_sheet.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/payout_dialogue_sheet.xml" value="0.28059866941501554" />
         <entry key="app/src/main/res/layout/saver_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/success_dialogue.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/transaction_item_layout.xml" value="0.335" />

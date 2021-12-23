@@ -47,7 +47,7 @@ class TransactionsFragment : BaseFragment<FragmentTransactionsBinding>(R.layout.
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
                         sessions.clearAuthToken()
                         Toast.makeText(requireContext(), "login.. you have been idle for a while", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+                        findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToLoginFragment())
                     }else{
                         showSnackBar(response.error?.message!!)
                     }

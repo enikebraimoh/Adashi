@@ -87,7 +87,11 @@
         android:id="@+id/transactionsFragment"
         android:name="ng.adashi.ui.transactions.TransactionsFragment"
         android:label="fragment_transactions"
-        tools:layout="@layout/fragment_transactions" />
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/action_transactionsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/moreFragment"
         android:name="ng.adashi.ui.more.MoreFragment"
