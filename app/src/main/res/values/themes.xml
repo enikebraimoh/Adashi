@@ -21,9 +21,11 @@
         <item name="android:typeface">monospace</item>
         <item name="android:background">@drawable/cornercircle</item>
     </style>
+
     <style name="BaseBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
+
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
     <!--- end of bottom sheet style -->
