@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_homeFragment_to_transactionsFragment"
             app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_makeSavingFragment"
+            app:destination="@id/makeSavingFragment" />
     </fragment>
     <fragment
         android:id="@+id/saversFragment"
@@ -103,4 +106,8 @@
         android:name="ng.adashi.ui.notifications.NotificationsFragment"
         android:label="NotificationsFragment" >
     </fragment>
+    <fragment
+        android:id="@+id/makeSavingFragment"
+        android:name="ng.adashi.ui.makesavings.MakeSavingFragment"
+        android:label="MakeSavingFragment" />
 </navigation>

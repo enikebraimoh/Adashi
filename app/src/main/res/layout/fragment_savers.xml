@@ -8,7 +8,6 @@
         <variable
             name="data"
             type="ng.adashi.ui.savers.SaversViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

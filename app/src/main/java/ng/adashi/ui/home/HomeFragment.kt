@@ -78,8 +78,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
         binding.savings.setOnClickListener {
-            val BS = AddSavingsBottomSheet()
-            BS.show(requireActivity().supportFragmentManager, "something")
+            //val BS = AddSavingsBottomSheet()
+            //BS.show(requireActivity().supportFragmentManager, "something")
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMakeSavingFragment())
 
         }
         binding.deposit.setOnClickListener {
