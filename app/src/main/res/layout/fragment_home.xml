@@ -105,6 +105,8 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:id="@+id/savings"
                             android:layout_width="150dp"
                             android:layout_height="120dp"
@@ -146,6 +148,8 @@
 
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:id="@+id/deposit"
                             android:layout_width="150dp"
                             android:layout_height="120dp"
@@ -185,6 +189,8 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:id="@+id/withdrawal"
                             android:layout_width="150dp"
                             android:layout_height="120dp"
@@ -224,6 +230,8 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:id="@+id/payout"
                             android:layout_width="150dp"
                             android:layout_height="120dp"

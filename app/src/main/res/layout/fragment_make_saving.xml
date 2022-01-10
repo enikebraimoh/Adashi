@@ -23,6 +23,8 @@
             android:text="@string/hello_blank_fragment">
 
             <ImageView
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginStart="@dimen/margin_10_dp"
                 app:tint="@color/white"
                 android:src="@drawable/ic_back_arrow"
@@ -39,7 +41,133 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+        
+        <TextView
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:text="Recent savers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorAccent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"/>
+
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/amount_field"
@@ -48,7 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_10_dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/inter_regular"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +198,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/account_id_field"
-            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -93,6 +220,45 @@
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:enabled="false"
+            android:id="@+id/account_name_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/inter_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="Enike Richard Braimoh"
+                android:fontFamily="@font/inter_semibold"
+                android:padding="25dp"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:elevation="0dp"
+            android:layout_marginTop="@dimen/margin_30_dp"
+            android:padding="@dimen/margin_20_dp"
+            android:text="Save"
+            android:fontFamily="@font/inter_medium"
+            android:textAllCaps="false"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </layout>
