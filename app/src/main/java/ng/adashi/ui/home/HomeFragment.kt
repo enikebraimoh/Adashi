@@ -89,12 +89,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         }
         binding.withdrawal.setOnClickListener {
-            val BS = DepositBottomSheet()
+            val BS = WithdrawBottomSheet()
             BS.show(requireActivity().supportFragmentManager, "something")
         }
         binding.payout.setOnClickListener {
-            val BS = WithdrawBottomSheet()
-            BS.show(requireActivity().supportFragmentManager, "something")
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPayoutFragment())
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(

@@ -79,6 +79,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_payoutFragment"
+            app:destination="@id/payoutFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/saversFragment"
@@ -115,4 +122,9 @@
         android:id="@+id/makeSavingFragment"
         android:name="ng.adashi.ui.makesavings.MakeSavingFragment"
         android:label="MakeSavingFragment" />
+    <fragment
+        tools:layout="@layout/fragment_payout"
+        android:id="@+id/payoutFragment"
+        android:name="ng.adashi.ui.payout.PayoutFragment"
+        android:label="PayoutFragment" />
 </navigation>
