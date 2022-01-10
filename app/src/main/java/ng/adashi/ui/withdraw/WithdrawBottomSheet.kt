@@ -26,7 +26,7 @@ class WithdrawBottomSheet : RoundedBottomSheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loginButton.setOnClickListener {
+        binding.proceed.setOnClickListener {
             val ss = SuccessDialogue(requireActivity())
             dismiss()
             ss.show()

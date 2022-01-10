@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_make_saving.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/fragment_payout.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_savers.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.27685185185185185" />

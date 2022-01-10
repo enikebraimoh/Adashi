@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:padding="10dp"
-        android:backgroundTint="?android:colorBackground"
+        android:background="@drawable/rounded"
         android:layout_height="wrap_content">
 
         <FrameLayout
@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="5dp" />
 
         <TextView
@@ -28,9 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Make a Withdrawal"
-            android:textAllCaps="true"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Make a withdrawal"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +46,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Amount"
+            android:hint="0"
+            app:startIconDrawable="@drawable/ic_ngn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login">
@@ -72,7 +72,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Account ID"
+            android:hint="Enike Braimoh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/amount_field">
@@ -88,61 +88,21 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/account_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Enike Richard Braimoh"
-            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-            android:textColor="@color/primaryColor"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/Account_id_field"
-            app:layout_constraintTop_toBottomOf="@+id/Account_id_field" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pin_field"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Four Digit Pin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/account_name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:inputType="number"
-                android:padding="15dp"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
+        <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="@dimen/margin_30_dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:id="@+id/proceed"
+            android:text="Proceed"
             android:backgroundTint="@color/primaryColor"
-            android:id="@+id/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="18dp"
-            android:text="Login"
+            android:padding="15dp"
+            android:fontFamily="@font/inter_medium"
             android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pin_field" />
+            app:layout_constraintTop_toBottomOf="@+id/Account_id_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
