@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:padding="10dp"
-        android:background="@drawable/rounded"
+        android:background="@drawable/cornercircle"
         android:layout_height="wrap_content">
 
         <FrameLayout
@@ -46,7 +46,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:hint="0"
             app:startIconDrawable="@drawable/ic_ngn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +71,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Enike Braimoh"
+            android:hint="Choose an account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/amount_field">
@@ -89,18 +88,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:layout_marginTop="@dimen/margin_30_dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:id="@+id/proceed"
-            android:text="Proceed"
-            android:backgroundTint="@color/primaryColor"
-            android:padding="15dp"
-            android:fontFamily="@font/inter_medium"
-            android:textAllCaps="false"
             app:layout_constraintTop_toBottomOf="@+id/Account_id_field"
+            android:id="@+id/proceed"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_marginTop="@dimen/margin_30_dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:padding="18dp"
+            android:text="Proceed"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 
 
