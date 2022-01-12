@@ -61,24 +61,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:layout_margin="20dp"
-                    app:cardBackgroundColor="@color/primaryColor"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="20dp">
-
                     <androidx.viewpager2.widget.ViewPager2
+                        android:layout_marginBottom="@dimen/margin_20_dp"
+                        android:layout_marginTop="@dimen/margin_20_dp"
+                        app:layout_constraintTop_toTopOf="parent"
                         android:id="@+id/viewpager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
+                        android:layout_height="220dp">
                     </androidx.viewpager2.widget.ViewPager2>
-
-                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/quick_actions"
@@ -87,8 +77,8 @@
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="Quick Actions"
-                    app:layout_constraintStart_toStartOf="@+id/cardView"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                    app:layout_constraintStart_toStartOf="@+id/viewpager"
+                    app:layout_constraintTop_toBottomOf="@+id/viewpager" />
 
                 <HorizontalScrollView
                     android:id="@+id/quick_actions_scrollview"
@@ -284,7 +274,7 @@
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="Recent Transactions"
-                    app:layout_constraintStart_toStartOf="@+id/cardView"
+                    app:layout_constraintStart_toStartOf="@+id/viewpager"
                     app:layout_constraintTop_toBottomOf="@+id/quick_actions_scrollview" />
 
                 <androidx.recyclerview.widget.RecyclerView

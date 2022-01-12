@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import ng.adashi.R
@@ -44,6 +45,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.agentname.text = getString(R.string.agent_name, agent_name)
 
         val sessions = SessionManager(requireContext())
+
+        val money = mutableListOf("NGN20,000.00","NGN50,000.00")
+
+        binding.viewpager.adapter = BalanceViewPagerAdapter(money)
+        binding.viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         viewModel.transactions.observe(this, { response ->
             when (response) {
