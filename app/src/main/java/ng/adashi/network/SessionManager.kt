@@ -18,6 +18,7 @@ constructor(var context: Context) {
         const val USER_TOKEN = "user_token"
         const val LOGINSTATE = "login_state"
         const val AGENT_ID = "agent_id"
+        const val WALLET_ID = "wallet_id"
         const val AGENT_FIRST_NAME = "agent_first_name"
     }
 
@@ -37,6 +38,7 @@ constructor(var context: Context) {
         val editor = prefs.edit()
         editor.putString(AGENT_ID, agent.agentID)
         editor.putString(AGENT_FIRST_NAME, agent.firstName)
+        editor.putString(WALLET_ID, agent.walletId)
         editor.apply()
     }
 
@@ -65,7 +67,8 @@ constructor(var context: Context) {
             null,
             null,
             null,
-            null)
+            prefs.getString(WALLET_ID, "WALLET_ID")!!
+        )
     }
 
 

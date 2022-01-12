@@ -11,5 +11,5 @@ data class AgentUser(
     val identity: Identity? = null,
     val lastName: String?,
     val name: String?,
-    val walletId: String?
+    val walletId: String
 )
