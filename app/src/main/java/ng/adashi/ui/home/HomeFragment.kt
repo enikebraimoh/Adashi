@@ -2,8 +2,11 @@ package ng.adashi.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.text.Html
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
@@ -19,15 +22,22 @@ import ng.adashi.network.SessionManager
 import ng.adashi.ui.deposit.DepositBottomSheet
 import ng.adashi.ui.home.models.transactions.Data
 import ng.adashi.ui.home.models.transactions.Transaction
+import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.ui.makesavings.AddSavingsBottomSheet
 import ng.adashi.ui.payout.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 import ng.adashi.utils.DataState
+import java.text.NumberFormat
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
+    var firstTime = true
     override fun start() {
+
+        val money = mutableListOf("NGN 20,000.00","NGN 0")
+        val balance = mutableListOf("Total Balance","Earnings")
 
         Log.d("ERRR","in home fragment")
 
@@ -36,19 +46,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.data = viewModel
         binding.lifecycleOwner = this
 
+
+        val sessions = SessionManager(requireContext())
+
         var prefs: SharedPreferences = requireContext().getSharedPreferences(
             requireContext().getString(R.string.app_name),
             Context.MODE_PRIVATE
         )
 
         val agent_name = prefs.getString(SessionManager.AGENT_FIRST_NAME, "name")
+        val wallet_id = prefs.getString(SessionManager.WALLET_ID, "aggentt")
+
         binding.agentname.text = getString(R.string.agent_name, agent_name)
+        Toast.makeText(requireContext(), wallet_id, Toast.LENGTH_SHORT).show()
+        viewModel.getWalletDetails(wallet_id!!)
 
-        val sessions = SessionManager(requireContext())
 
-        val money = mutableListOf("NGN20,000.00","NGN50,000.00")
+        addFirstDot(binding)
 
-        binding.viewpager.adapter = BalanceViewPagerAdapter(money)
+        //Listening to page callbacks
+        binding.viewpager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    if (firstTime)
+                        firstTime = false
+                    else
+                        addDot(position)
+                }
+            }
+        )
+
+
+        binding.viewpager.adapter = BalanceViewPagerAdapter(money,balance)
         binding.viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         viewModel.transactions.observe(this, { response ->
@@ -78,10 +108,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         })
 
+        viewModel.wallet_ballance.observe(this, { response ->
+            when (response) {
+                is DataState.Success<AgentWalletResponse> -> {
+                   // initAdapter(response.data.transactions)
+                    Toast.makeText(requireContext(), response.data.data.balance, Toast.LENGTH_SHORT).show()
+                    val newformat: NumberFormat = NumberFormat.getCurrencyInstance()
+                    newformat.setMaximumFractionDigits(0)
+                    newformat.setCurrency(Currency.getInstance("NGN"))
+                    val bal = response.data.data.balance.toString()
+                    money[0] = newformat.format(bal)
+
+                }
+                is DataState.Error -> {
+                    if (!response.error.localizedMessage.isNullOrEmpty()){
+                        showSnackBar(response.error.localizedMessage!!)
+                    }
+                    showSnackBar("Slow or no Internet Connection")
+                }
+                is DataState.GenericError -> {
+                    if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
+                        sessions.clearAuthToken()
+                        Toast.makeText(requireContext(), "login.. you have been idle for a while", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+                    }else{
+                        showSnackBar(response.error?.message!!)
+                    }
+                }
+                DataState.Loading -> {
+                    // showSnackBar("loading..")
+                }
+            }
+        })
+
+
+
         binding.viewmore.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
         }
-
 
         binding.savings.setOnClickListener {
             //val BS = AddSavingsBottomSheet()
@@ -140,6 +204,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun showSnackBar(message: String) {
         Snackbar.make(requireActivity(), binding.root, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    // creates dot indicator for the first enterance of the onBoardingScreen
+    private fun addFirstDot(view: FragmentHomeBinding) {
+
+        view.pos1.setText(Html.fromHtml("&#8226;"))
+        view.pos2.setText(Html.fromHtml("&#8226;"))
+
+        view.pos1.textSize = 40f
+        view.pos2.textSize = 40f
+
+
+        view.pos1.setTextColor(Color.parseColor("#C4C4C4"))
+        view.pos2.setTextColor(Color.parseColor("#C4C4C4"))
+        view.pos1.setTextColor(Color.parseColor("#FED525"))
+
+    }
+
+    //creates dot indicator
+    private fun addDot(position: Int) {
+        val textViews = arrayOfNulls<TextView>(2)
+        binding?.let { it.liner.removeAllViews() }
+        var i = 0
+        while (i < 2) {
+            textViews[i] = TextView(requireContext())
+            textViews[i]?.setText(Html.fromHtml("&#8226;"))
+            textViews[i]?.textSize = 40f
+            textViews[i]?.setTextColor(Color.parseColor("#C4C4C4"))
+
+            binding?.let { _view ->
+                _view.liner.addView(textViews[i])
+            }
+            i++
+        }
+
+        if (textViews.size > 0)
+            textViews[position]?.setTextColor(Color.parseColor("#FED525"))
     }
 
 }

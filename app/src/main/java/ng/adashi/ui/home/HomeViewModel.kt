@@ -34,5 +34,11 @@ constructor(val repo: HomeRepository) : ViewModel() {
        }.launchIn(viewModelScope)
     }
 
+    fun getWalletDetails(id : String){
+        repo.getWalletAgentDetails(id).onEach { data ->
+            _wallet_ballance.value = data
+        }.launchIn(viewModelScope)
+    }
+
 
 }
