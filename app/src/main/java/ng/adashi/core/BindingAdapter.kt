@@ -7,7 +7,9 @@ import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import ng.adashi.ui.home.models.transactions.Transaction
 import ng.adashi.ui.savers.models.Wallet
+import ng.adashi.utils.convertStringToDate
 import java.text.NumberFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @BindingAdapter("verify_field")
@@ -19,6 +21,16 @@ fun verifyField(field: TextInputLayout, error: String?) {
         field.isErrorEnabled = false
     }
 }
+
+@BindingAdapter("format_date_time")
+fun formatDateTime(view: TextView, date: String) {
+    val formatedDate = convertStringToDate(date)
+    val formatedTime = formatedDate.format(DateTimeFormatter.ofPattern("hh:mm a"))
+
+    view.text = "${formatedDate.dayOfWeek}, $formatedTime"
+
+}
+
 
 @BindingAdapter("currency_converter")
 fun currencyConverter(tv: TextView, data: Any) {
@@ -39,9 +51,9 @@ fun getSaverBalance(tv: TextView, data: Wallet) {
     tv.text = newformat.format(bal)
 }
 
-@BindingAdapter("amount")
-fun Amount(tv: TextView, data: Transaction) {
-    tv.text = data.amount.toString()
+@BindingAdapter("azza")
+fun Azza(tv: TextView, data: List<String>) {
+    tv.text = data.toString().replace("]","").replace("[","")
 }
 
 @BindingAdapter("long_to_string")
