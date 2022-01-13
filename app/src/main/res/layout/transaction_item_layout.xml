@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/inter_regular"
-            android:text="@{data.createdAt}"
+            app:format_date_time="@{data.createdAt}"
             tools:text="Today Aug. 21, 2021 (2:00PM)"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/withdrawal"
@@ -34,8 +34,9 @@
             android:id="@+id/withdrawal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium"
-            android:text="@{data.reference}"
+            android:fontFamily="@font/inter_semibold"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:azza="@{data.purpose}"
             tools:text="Savings"
             app:layout_constraintBottom_toTopOf="@+id/date_and_time"
             app:layout_constraintHorizontal_bias="0.1"
@@ -45,15 +46,24 @@
 
         <TextView
             android:id="@+id/successful"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="@dimen/margin_20_dp"
-            android:layout_height="wrap_content"
-            tools:text="-2,0000"
-            android:fontFamily="@font/inter_semibold"
             currency_converter="@{data.amount}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintBottom_toBottomOf="@+id/date_and_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/date_and_time"
+            tools:text="-2,0000" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="128dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
