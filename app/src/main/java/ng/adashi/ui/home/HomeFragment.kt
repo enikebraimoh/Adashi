@@ -19,15 +19,15 @@ import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentHomeBinding
 import ng.adashi.network.SessionManager
-import ng.adashi.ui.deposit.DepositBottomSheet
 import ng.adashi.ui.home.models.transactions.Data
 import ng.adashi.ui.home.models.transactions.Transaction
 import ng.adashi.ui.home.models.wallet.AgentWalletResponse
-import ng.adashi.ui.makesavings.AddSavingsBottomSheet
 import ng.adashi.ui.payout.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 import ng.adashi.utils.DataState
+import ng.adashi.utils.convertStringToDate
 import java.text.NumberFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @AndroidEntryPoint
@@ -36,12 +36,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     var firstTime = true
     override fun start() {
 
-        val money = mutableListOf("NGN 20,000.00","NGN 0")
-        val balance = mutableListOf("Total Balance","Earnings")
+        val money = mutableListOf("NGN 0.00", "NGN 0")
+        val balance = mutableListOf("Total Balance", "Earnings")
 
-        Log.d("ERRR","in home fragment")
+        Log.d("ERRR", "in home fragment")
 
-        val viewModel : HomeViewModel by viewModels()
+        val viewModel: HomeViewModel by viewModels()
 
         binding.data = viewModel
         binding.lifecycleOwner = this
@@ -58,7 +58,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val wallet_id = prefs.getString(SessionManager.WALLET_ID, "aggentt")
 
         binding.agentname.text = getString(R.string.agent_name, agent_name)
-        Toast.makeText(requireContext(), wallet_id, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), wallet_id, Toast.LENGTH_SHORT).show()
         viewModel.getWalletDetails(wallet_id!!)
 
 
@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         )
 
 
-        binding.viewpager.adapter = BalanceViewPagerAdapter(money,balance)
+        binding.viewpager.adapter = BalanceViewPagerAdapter(money, balance)
         binding.viewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         viewModel.transactions.observe(this, { response ->
@@ -86,24 +86,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 is DataState.Success<Data> -> {
                     initAdapter(response.data.transactions)
                     binding.viewmore.visibility = View.VISIBLE
+
                 }
                 is DataState.Error -> {
-                    if (!response.error.localizedMessage.isNullOrEmpty()){
+                    if (!response.error.localizedMessage.isNullOrEmpty()) {
                         showSnackBar(response.error.localizedMessage!!)
                     }
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
-                    if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
+                    if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
                         sessions.clearAuthToken()
-                        Toast.makeText(requireContext(), "login.. you have been idle for a while", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "login.. you have been idle for a while",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-                    }else{
+                    } else {
                         showSnackBar(response.error?.message!!)
                     }
                 }
                 DataState.Loading -> {
-                   // showSnackBar("loading..")
+                    // showSnackBar("loading..")
                 }
             }
         })
@@ -111,8 +116,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.wallet_ballance.observe(this, { response ->
             when (response) {
                 is DataState.Success<AgentWalletResponse> -> {
-                   // initAdapter(response.data.transactions)
-                    Toast.makeText(requireContext(), response.data.data.balance, Toast.LENGTH_SHORT).show()
+                    // initAdapter(response.data.transactions)
+                    //Toast.makeText(requireContext(), response.data.data.balance, Toast.LENGTH_SHORT).show()
                     val newformat: NumberFormat = NumberFormat.getCurrencyInstance()
                     newformat.setMaximumFractionDigits(0)
                     newformat.setCurrency(Currency.getInstance("NGN"))
@@ -121,17 +126,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
                 }
                 is DataState.Error -> {
-                    if (!response.error.localizedMessage.isNullOrEmpty()){
+                    if (!response.error.localizedMessage.isNullOrEmpty()) {
                         showSnackBar(response.error.localizedMessage!!)
                     }
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
-                    if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
+                    if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
                         sessions.clearAuthToken()
-                        Toast.makeText(requireContext(), "login.. you have been idle for a while", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "login.. you have been idle for a while",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-                    }else{
+                    } else {
                         showSnackBar(response.error?.message!!)
                     }
                 }
@@ -196,9 +205,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         }
 
+
+
         binding.recyclerView.adapter = adapter
         val newData = data.slice(0..4)
         adapter.submitList(newData)
+
 
     }
 

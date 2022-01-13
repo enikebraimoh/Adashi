@@ -1,28 +1,18 @@
 package ng.adashi.ui.login
 
-import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import ng.adashi.domain_models.login.LoginDetails
-import ng.adashi.domain_models.login.LoginResponse
 import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.network.SessionManager
 import ng.adashi.repository.AuthRepository
 import ng.adashi.utils.App
 import ng.adashi.utils.DataState
-import ng.adashi.utils.Utils
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +20,8 @@ class LoginViewModel
 @Inject
 constructor(val authRepository: AuthRepository) : ViewModel() {
 
-    @Inject lateinit var sessions : SessionManager
+    @Inject
+    lateinit var sessions: SessionManager
 
     var email: String? = null
     var password: String? = null
@@ -96,11 +87,11 @@ constructor(val authRepository: AuthRepository) : ViewModel() {
         }
     }
 
-    fun navigate(){
+    fun navigate() {
         _navigateToDashboard.value = true
     }
 
-    fun navigationDone(){
+    fun navigationDone() {
         _navigateToDashboard.value = false
     }
 
