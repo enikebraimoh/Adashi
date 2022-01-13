@@ -1,5 +1,6 @@
 package ng.adashi.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.datastore.preferences.createDataStore
 import androidx.datastore.preferences.edit
@@ -7,8 +8,16 @@ import androidx.datastore.preferences.preferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ng.adashi.domain_models.login.LoginResponse
+import java.text.SimpleDateFormat
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
-class Utils {
+
+    fun convertStringToDate(time: String): OffsetDateTime {
+        val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.ENGLISH)
+        return OffsetDateTime.parse (time,dtf)
+    }
 
     class LoginState(context: Context) {
         private val data = context.createDataStore("login_response")
@@ -39,5 +48,3 @@ class Utils {
         }
 
     }
-
-}
