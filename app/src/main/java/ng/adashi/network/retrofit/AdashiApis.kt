@@ -1,6 +1,7 @@
 package ng.adashi.network.retrofit
 
 
+import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
@@ -24,9 +25,7 @@ interface AdashiApis {
     @GET("api/v1/agent/savers")
     suspend fun GetAllSavers() : SaversResponse
 
-    @GET("api/v1/agent/wallet/{wallet_Id}")
-    suspend fun GetAgentWallet(
-        @Path("wallet_Id") wallet_Id : String
-    ) : AgentWalletResponse
+    @GET("api/v1/agent/balance")
+    suspend fun GetAgentWallet() : AgentWalletDetails
 
 }

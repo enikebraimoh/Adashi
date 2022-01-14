@@ -1,5 +1,6 @@
 package ng.adashi.network
 
+import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.network.retrofit.*
 import ng.adashi.domain_models.login.LoginToken
@@ -24,8 +25,8 @@ constructor (private val retrofitApis : AdashiApis) : NetworkDataSource {
         return retrofitApis.GetAllSavers()
     }
 
-    override suspend fun GetWallet(wallet_id: String): AgentWalletResponse {
-     return retrofitApis.GetAgentWallet(wallet_id)
+    override suspend fun GetAgentWallet(): AgentWalletDetails {
+        return retrofitApis.GetAgentWallet()
     }
 
 }

@@ -2,6 +2,7 @@ package ng.adashi.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.network.NetworkDataSource
 import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
 import ng.adashi.ui.home.models.transactions.Data
@@ -17,10 +18,10 @@ class HomeRepository
 @Inject
 constructor(private val networkDataSource: NetworkDataSource) {
 
-     fun getWalletAgentDetails (wallet_id: String) : Flow<DataState<AgentWalletResponse>> = flow {
+     fun getWalletAgentDetails () : Flow<DataState<AgentWalletDetails>> = flow {
         emit(DataState.Loading)
         try {
-            val response = networkDataSource.GetWallet(wallet_id)
+            val response = networkDataSource.GetAgentWallet()
             emit(DataState.Success(response))
         } catch (e: Exception) {
             when (e){

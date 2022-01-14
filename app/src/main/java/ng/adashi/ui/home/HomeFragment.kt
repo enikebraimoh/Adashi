@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentHomeBinding
+import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.network.SessionManager
 import ng.adashi.ui.home.models.transactions.Data
 import ng.adashi.ui.home.models.transactions.Transaction
@@ -36,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     var firstTime = true
     override fun start() {
 
-        val money = mutableListOf("NGN 0.00", "NGN 0")
+        val money = mutableListOf("NGN 0", "NGN 0")
         val balance = mutableListOf("Total Balance", "Earnings")
 
         Log.d("ERRR", "in home fragment")
@@ -59,8 +60,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         binding.agentname.text = getString(R.string.agent_name, agent_name)
         //Toast.makeText(requireContext(), wallet_id, Toast.LENGTH_SHORT).show()
-        viewModel.getWalletDetails(wallet_id!!)
-
 
         addFirstDot(binding)
 
@@ -115,14 +114,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         viewModel.wallet_ballance.observe(this, { response ->
             when (response) {
-                is DataState.Success<AgentWalletResponse> -> {
-                    // initAdapter(response.data.transactions)
-                    //Toast.makeText(requireContext(), response.data.data.balance, Toast.LENGTH_SHORT).show()
+                is DataState.Success<AgentWalletDetails> -> {
+
                     val newformat: NumberFormat = NumberFormat.getCurrencyInstance()
                     newformat.setMaximumFractionDigits(0)
                     newformat.setCurrency(Currency.getInstance("NGN"))
+
                     val bal = response.data.data.balance.toString()
-                    money[0] = newformat.format(bal)
+                    val earnings =  response.data.data.earnings.toString()
+
+                    Toast.makeText(requireContext(),"${bal}, ${earnings} " , Toast.LENGTH_SHORT).show()
+
+                    money.clear()
+
+                    money.addAll(0, listOf(newformat.format(bal.toLong()),newformat.format(earnings.toLong())))
+                    (binding.viewpager.adapter as BalanceViewPagerAdapter).notifyDataSetChanged()
+
+                    //money.add(newformat.format(bal.toLong()))
+                    //money.add(newformat.format(earnings.toLong()))
+
 
                 }
                 is DataState.Error -> {

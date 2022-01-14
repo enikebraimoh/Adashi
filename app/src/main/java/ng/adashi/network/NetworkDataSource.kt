@@ -1,5 +1,6 @@
 package ng.adashi.network
 
+import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
@@ -12,7 +13,6 @@ interface NetworkDataSource {
     suspend fun GetAgentTransactions() : AgentTransactionsResponse
     suspend fun GetAllSavers() : SaversResponse
 
-
-    suspend fun GetWallet(wallet_id : String) : AgentWalletResponse
+    suspend fun GetAgentWallet() : AgentWalletDetails
 
 }

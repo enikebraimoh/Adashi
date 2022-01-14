@@ -6,10 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import ng.adashi.R
+import androidx.viewpager.widget.PagerAdapter.POSITION_NONE
 
-class BalanceViewPagerAdapter(private var balance : List<String>,private var title : List<String>)
+
+
+
+class BalanceViewPagerAdapter(private var balance : MutableList<String>,private var title : List<String>)
     : RecyclerView.Adapter<BalanceViewPagerAdapter.BalanceViewHolder>() {
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BalanceViewHolder {
