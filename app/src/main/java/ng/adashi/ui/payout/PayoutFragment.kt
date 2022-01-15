@@ -16,6 +16,10 @@ class PayoutFragment : BaseFragment<FragmentPayoutBinding>(R.layout.fragment_pay
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
+
+
+
+
     }
 
 

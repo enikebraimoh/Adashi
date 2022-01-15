@@ -8,6 +8,7 @@ import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
 import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.ui.makesavings.models.SaveDetails
 import ng.adashi.ui.makesavings.models.SaveResponse
+import ng.adashi.ui.payout.models.PayoutResponse
 import ng.adashi.ui.savers.addsaver.models.SaverResponse
 import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
@@ -39,6 +40,10 @@ constructor (private val retrofitApis : AdashiApis) : NetworkDataSource {
 
     override suspend fun save(save: SaveDetails): SaveResponse {
         return retrofitApis.save(save = save)
+    }
+
+    override suspend fun payout(save: SaveDetails): PayoutResponse {
+        return retrofitApis.payOut(save)
     }
 
 }
