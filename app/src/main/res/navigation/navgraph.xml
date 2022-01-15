@@ -96,6 +96,13 @@
             android:id="@+id/action_saversFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment" />
+        <action
+            android:id="@+id/action_saversFragment_to_addSaverFragment"
+            app:destination="@id/addSaverFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -110,7 +117,11 @@
         android:id="@+id/moreFragment"
         android:name="ng.adashi.ui.more.MoreFragment"
         android:label="fragment_more"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_more" >
+        <action
+            android:id="@+id/action_moreFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_notifications"
         android:id="@+id/notificationsFragment"
@@ -121,10 +132,19 @@
         tools:layout="@layout/fragment_make_saving"
         android:id="@+id/makeSavingFragment"
         android:name="ng.adashi.ui.makesavings.MakeSavingFragment"
-        android:label="MakeSavingFragment" />
+        android:label="MakeSavingFragment" >
+        <action
+            android:id="@+id/action_makeSavingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_payout"
         android:id="@+id/payoutFragment"
         android:name="ng.adashi.ui.payout.PayoutFragment"
         android:label="PayoutFragment" />
+    <fragment
+        tools:layout="@layout/fragment_add_saver"
+        android:id="@+id/addSaverFragment"
+        android:name="ng.adashi.ui.savers.addsaver.AddSaverFragment"
+        android:label="AddSaverFragment" />
 </navigation>

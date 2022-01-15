@@ -26,6 +26,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginStart="@dimen/margin_10_dp"
                 app:tint="@color/white"
+                android:id="@+id/back_button"
                 android:src="@drawable/ic_back_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

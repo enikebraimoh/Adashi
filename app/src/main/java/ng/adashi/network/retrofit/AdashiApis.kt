@@ -6,6 +6,9 @@ import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
 import ng.adashi.ui.home.models.wallet.AgentWalletResponse
+import ng.adashi.ui.makesavings.models.SaveDetails
+import ng.adashi.ui.makesavings.models.SaveResponse
+import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -27,5 +30,15 @@ interface AdashiApis {
 
     @GET("api/v1/agent/balance")
     suspend fun GetAgentWallet() : AgentWalletDetails
+
+    @POST("api/v1/saver/saver")
+    suspend fun AddSaver(
+        @Body saver : SingleSaver
+    ) : ng.adashi.ui.savers.addsaver.models.SaverResponse
+
+    @POST("api/v1/transactions/savings")
+    suspend fun save(
+        @Body save : SaveDetails
+    ) : SaveResponse
 
 }
