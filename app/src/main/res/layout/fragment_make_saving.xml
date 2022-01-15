@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="data"
+            type="ng.adashi.ui.makesavings.MakeSavingsViewModel"/>
 
     </data>
 
@@ -24,6 +27,7 @@
 
             <ImageView
                 android:clickable="true"
+                android:id="@+id/back_button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginStart="@dimen/margin_10_dp"
                 app:tint="@color/white"
@@ -213,7 +217,7 @@
                 android:id="@+id/account_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="text"
                 android:hint="Account ID"
                 android:fontFamily="@font/inter_regular"
                 android:padding="18dp"
@@ -241,9 +245,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="Enike Richard Braimoh"
+                android:text="---------------------------------------------------------------------------"
                 android:fontFamily="@font/inter_semibold"
-                android:padding="25dp"
+                android:padding="20dp"
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -253,6 +257,7 @@
             android:layout_marginTop="@dimen/margin_30_dp"
             android:padding="@dimen/margin_20_dp"
             android:text="Save"
+            android:id="@+id/save_btn"
             android:fontFamily="@font/inter_medium"
             android:textAllCaps="false"
             android:layout_marginStart="16dp"

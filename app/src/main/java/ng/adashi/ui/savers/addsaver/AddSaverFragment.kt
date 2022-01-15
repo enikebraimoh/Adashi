@@ -1,12 +1,7 @@
-package ng.adashi.ui.makesavings
+package ng.adashi.ui.savers.addsaver
 
 import android.app.Dialog
 import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -16,55 +11,55 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import ng.adashi.R
 import ng.adashi.core.BaseFragment
-import ng.adashi.databinding.FragmentMakeSavingBinding
+import ng.adashi.databinding.FragmentAddSaverBinding
 import ng.adashi.network.SessionManager
 import ng.adashi.ui.home.HomeFragmentDirections
-import ng.adashi.ui.makesavings.models.SaveDetails
-import ng.adashi.ui.makesavings.models.SaveResponse
-import ng.adashi.ui.password.PasswordBottomSheet
-import ng.adashi.ui.savers.SaversFragmentDirections
-import ng.adashi.ui.savers.SaversViewModel
 import ng.adashi.ui.savers.addsaver.models.SaverResponse
-import ng.adashi.ui.savers.models.Data
+import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.utils.DataState
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.fragment_make_saving) {
-
-    @Inject
-    lateinit var sessions : SessionManager
+class AddSaverFragment : BaseFragment<FragmentAddSaverBinding>(R.layout.fragment_add_saver) {
 
     private lateinit var loadingdialog: Dialog
 
     override fun start() {
         super.start()
 
-        val viewModel : MakeSavingsViewModel by viewModels()
+        loadingdialog = Dialog(requireContext())
+
+
+        val viewModel: AddSaverViewModel by viewModels()
+
         binding.data = viewModel
         binding.lifecycleOwner = this
+
+        val sessions = SessionManager(requireContext())
+
 
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        binding.saveBtn.setOnClickListener {
+        binding.addSaverBtn.setOnClickListener {
+            val saver = SingleSaver(
+                binding.address.text.toString(),
+                binding.city.text.toString(),
+                binding.email.text.toString(),
+                binding.firstname.text.toString(),
+                binding.lastName.text.toString(),
+                binding.occupation.text.toString(),
+                binding.phone.text.toString(), binding.state.text.toString()
+            )
 
-            val passwordBS = PasswordBottomSheet{ pin ->
-                val details = SaveDetails(binding.accountId.text.toString(),binding.amount.text.toString(),pin)
-                viewModel.save(details)
-            }
-
-            passwordBS.show(requireActivity().supportFragmentManager, "something")
-
-
+            viewModel.AddSaver(saver)
         }
 
-        viewModel.response.observe(this, { response ->
+        viewModel.addSaverResponse.observe(this, { response ->
             when (response) {
-                is DataState.Success<SaveResponse> -> {
+                is DataState.Success<SaverResponse> -> {
                     CancelProgressLoader()
-                    showSnackBar("Money successfully Saved!")
+                    showSnackBar("Successfully Added Saver")
                     findNavController().popBackStack()
                 }
                 is DataState.Error -> {
@@ -75,7 +70,7 @@ class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.frag
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
-                    if (response.error?.message.equals("Unauthenticated")) {
+                    if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
                         sessions.clearAuthToken()
                         CancelProgressLoader()
                         Toast.makeText(
@@ -83,7 +78,7 @@ class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.frag
                             "login.. you have been idle for a while",
                             Toast.LENGTH_SHORT
                         ).show()
-                        findNavController().navigate(MakeSavingFragmentDirections.actionMakeSavingFragmentToLoginFragment())
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
                     } else {
                         CancelProgressLoader()
                         showSnackBar(response.error?.message!!)
