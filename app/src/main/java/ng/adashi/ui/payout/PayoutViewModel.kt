@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.onEach
 import ng.adashi.repository.HomeRepository
 import ng.adashi.ui.makesavings.models.SaveDetails
 import ng.adashi.ui.makesavings.models.SaveResponse
+import ng.adashi.ui.payout.models.PayoutResponse
 import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.Data
 import ng.adashi.utils.DataState
@@ -30,12 +31,12 @@ constructor(val repo : HomeRepository) : ViewModel() {
     val saverIdError: LiveData<String?> get() = _saverIdError
 
 
-    private val _response = MutableLiveData<DataState<SaveResponse>>()
-    val response: LiveData<DataState<SaveResponse>> get() = _response
+    private val _response = MutableLiveData<DataState<PayoutResponse>>()
+    val response: LiveData<DataState<PayoutResponse>> get() = _response
 
 
-    fun save(save : SaveDetails){
-        repo.save(save).onEach { data ->
+    fun pay(save : SaveDetails){
+        repo.payout(save).onEach { data ->
             _response.value = data
         }.launchIn(viewModelScope)
     }

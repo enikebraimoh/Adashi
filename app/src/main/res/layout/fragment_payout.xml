@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="data"
+            type="ng.adashi.ui.payout.PayoutViewModel" />
 
     </data>
 
@@ -175,6 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            verify_field="@{data.amountError}"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_marginTop="@dimen/margin_10_dp"
             android:layout_marginEnd="16dp"
@@ -189,6 +193,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="Amount"
+                android:text="@={data.ammount}"
                 android:fontFamily="@font/inter_regular"
                 android:padding="18dp"
                 android:singleLine="true" />
@@ -203,6 +208,7 @@
             android:layout_marginStart="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_marginTop="20dp"
+            verify_field="@{data.saverIdError}"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/inter_regular"
             app:layout_constraintEnd_toEndOf="parent"
@@ -213,8 +219,9 @@
                 android:id="@+id/account_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="text"
                 android:hint="Account ID"
+                android:text="@={data.saver_id}"
                 android:fontFamily="@font/inter_regular"
                 android:padding="18dp"
                 android:singleLine="true" />
@@ -252,7 +259,8 @@
             android:elevation="0dp"
             android:layout_marginTop="@dimen/margin_30_dp"
             android:padding="@dimen/margin_20_dp"
-            android:text="Save"
+            android:text="Payout"
+            android:id="@+id/payout"
             android:fontFamily="@font/inter_medium"
             android:textAllCaps="false"
             android:layout_marginStart="16dp"

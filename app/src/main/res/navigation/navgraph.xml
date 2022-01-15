@@ -141,7 +141,11 @@
         tools:layout="@layout/fragment_payout"
         android:id="@+id/payoutFragment"
         android:name="ng.adashi.ui.payout.PayoutFragment"
-        android:label="PayoutFragment" />
+        android:label="PayoutFragment" >
+        <action
+            android:id="@+id/action_payoutFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_add_saver"
         android:id="@+id/addSaverFragment"
