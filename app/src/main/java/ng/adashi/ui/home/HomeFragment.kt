@@ -22,13 +22,10 @@ import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.network.SessionManager
 import ng.adashi.ui.home.models.transactions.Data
 import ng.adashi.ui.home.models.transactions.Transaction
-import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.ui.payout.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 import ng.adashi.utils.DataState
-import ng.adashi.utils.convertStringToDate
 import java.text.NumberFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 @AndroidEntryPoint
@@ -38,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun start() {
 
         val money = mutableListOf("NGN 0", "NGN 0")
-        val balance = mutableListOf("Total Balance", "Earnings")
+        val balance = mutableListOf("Adashi Balance", "Earnings")
 
         Log.d("ERRR", "in home fragment")
 
@@ -121,13 +118,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                     newformat.setCurrency(Currency.getInstance("NGN"))
 
                     val bal = response.data.data.balance.toString()
-                    val earnings =  response.data.data.earnings.toString()
-
-                    Toast.makeText(requireContext(),"${bal}, ${earnings} " , Toast.LENGTH_SHORT).show()
+                    val earnings = response.data.data.earnings.toString()
 
                     money.clear()
 
-                    money.addAll(0, listOf(newformat.format(bal.toLong()),newformat.format(earnings.toLong())))
+                    money.addAll(
+                        0,
+                        listOf(newformat.format(bal.toLong()), newformat.format(earnings.toLong()))
+                    )
                     (binding.viewpager.adapter as BalanceViewPagerAdapter).notifyDataSetChanged()
 
                     //money.add(newformat.format(bal.toLong()))
@@ -144,12 +142,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 is DataState.GenericError -> {
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
                         sessions.clearAuthToken()
-                        Toast.makeText(
-                            requireContext(),
-                            "login.. you have been idle for a while",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
+                        /* Toast.makeText(
+                             requireContext(),
+                             "login.. you have been idle for a while",
+                             Toast.LENGTH_SHORT
+                         ).show()*/
+                        // findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
                     } else {
                         showSnackBar(response.error?.message!!)
                     }
@@ -211,15 +209,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initAdapter(data: MutableList<Transaction>) {
 
-        val adapter = TransactonsAdapter {
+        val adapter = TransactonsAdapter ({
+            Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT)
 
-        }
-
-
+        })
 
         binding.recyclerView.adapter = adapter
-        val newData = data.slice(0..4)
-        adapter.submitList(newData)
+        if (data.size > 5) {
+            val newData = data.slice(0..4)
+            adapter.submitList(newData)
+        } else {
+            adapter.submitList(data)
+        }
 
 
     }
