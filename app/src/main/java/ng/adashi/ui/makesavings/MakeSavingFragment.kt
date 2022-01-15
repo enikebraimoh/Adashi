@@ -2,11 +2,6 @@ package ng.adashi.ui.makesavings
 
 import android.app.Dialog
 import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -18,14 +13,9 @@ import ng.adashi.R
 import ng.adashi.core.BaseFragment
 import ng.adashi.databinding.FragmentMakeSavingBinding
 import ng.adashi.network.SessionManager
-import ng.adashi.ui.home.HomeFragmentDirections
 import ng.adashi.ui.makesavings.models.SaveDetails
 import ng.adashi.ui.makesavings.models.SaveResponse
 import ng.adashi.ui.password.PasswordBottomSheet
-import ng.adashi.ui.savers.SaversFragmentDirections
-import ng.adashi.ui.savers.SaversViewModel
-import ng.adashi.ui.savers.addsaver.models.SaverResponse
-import ng.adashi.ui.savers.models.Data
 import ng.adashi.utils.DataState
 import javax.inject.Inject
 
@@ -33,14 +23,14 @@ import javax.inject.Inject
 class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.fragment_make_saving) {
 
     @Inject
-    lateinit var sessions : SessionManager
+    lateinit var sessions: SessionManager
 
     private lateinit var loadingdialog: Dialog
 
     override fun start() {
         super.start()
 
-        val viewModel : MakeSavingsViewModel by viewModels()
+        val viewModel: MakeSavingsViewModel by viewModels()
         binding.data = viewModel
         binding.lifecycleOwner = this
 
@@ -50,14 +40,22 @@ class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.frag
 
         binding.saveBtn.setOnClickListener {
 
-            val passwordBS = PasswordBottomSheet{ pin ->
-                val details = SaveDetails(binding.accountId.text.toString(),binding.amount.text.toString(),pin)
-                viewModel.save(details)
+            if (viewModel.validateAmountFIeld()) {
+                if (viewModel.validateSaverIdField()) {
+
+                    val passwordBS = PasswordBottomSheet { pin ->
+                        val details = SaveDetails(
+                            binding.accountId.text.toString(),
+                            binding.amount.text.toString(),
+                            pin
+                        )
+                        viewModel.save(details)
+                    }
+
+                    passwordBS.show(requireActivity().supportFragmentManager, "something")
+
+                }
             }
-
-            passwordBS.show(requireActivity().supportFragmentManager, "something")
-
-
         }
 
         viewModel.response.observe(this, { response ->
@@ -86,11 +84,11 @@ class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.frag
                         findNavController().navigate(MakeSavingFragmentDirections.actionMakeSavingFragmentToLoginFragment())
                     } else {
                         CancelProgressLoader()
-                        showSnackBar(response.error?.message!!)
+                        showSnackBar(response.error?.message.toString())
                     }
                 }
                 DataState.Loading -> {
-                    ShowProgressLoader(requireContext(),false,false)
+                    ShowProgressLoader(requireContext(), false, false)
                 }
             }
         })
@@ -110,7 +108,8 @@ class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.frag
         loadingdialog = Dialog(context)
         loadingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         loadingdialog.setContentView(R.layout.loader_dialog)
-        loadingdialog.getWindow()?.setBackgroundDrawable(context.resources.getDrawable(R.drawable.d_round_corner_white_bkg))
+        loadingdialog.getWindow()
+            ?.setBackgroundDrawable(context.resources.getDrawable(R.drawable.d_round_corner_white_bkg))
         val loader: CamomileSpinner = loadingdialog.findViewById(R.id.loader)
         loader.start()
         if (!outsideTouch) loadingdialog.setCanceledOnTouchOutside(false)

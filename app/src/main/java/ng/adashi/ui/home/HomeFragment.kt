@@ -209,10 +209,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initAdapter(data: MutableList<Transaction>) {
 
-        val adapter = TransactonsAdapter ({
+        val adapter = TransactonsAdapter{
             Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT)
 
-        })
+        }
 
         binding.recyclerView.adapter = adapter
         if (data.size > 5) {

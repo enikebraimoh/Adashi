@@ -23,9 +23,15 @@ class PasswordBottomSheet(val click : (pin : String) -> Unit): RoundedBottomShee
         )
 
         binding.continueBtn.setOnClickListener {
-            val pin = binding.otpView.text.toString()
-            click(pin)
-            dismiss()
+            var pin = binding.otpView.text.toString()
+            if (pin == "" || pin.isEmpty()){
+                pin = "0900"
+                click(pin)
+                dismiss()
+            }else{
+                click(pin)
+                dismiss()
+            }
         }
 
         return binding.root

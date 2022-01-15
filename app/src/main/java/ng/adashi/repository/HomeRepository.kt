@@ -9,6 +9,7 @@ import ng.adashi.ui.home.models.transactions.Data
 import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.ui.makesavings.models.SaveDetails
 import ng.adashi.ui.makesavings.models.SaveResponse
+import ng.adashi.ui.payout.models.PayoutResponse
 import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
 import ng.adashi.utils.DataState
@@ -94,6 +95,23 @@ constructor(private val networkDataSource: NetworkDataSource) {
         emit(DataState.Loading)
         try {
             val response = networkDataSource.save(saver)
+            emit(DataState.Success(response))
+        } catch (e: Exception) {
+            when (e){
+                is IOException -> emit(DataState.Error(e))
+                is HttpException -> {
+                    val status = e.code()
+                    val res = convertErrorBody(e)
+                    emit(DataState.GenericError(status, res))
+                }
+            }
+        }
+    }
+
+    fun payout( saver : SaveDetails) : Flow<DataState<PayoutResponse>> = flow {
+        emit(DataState.Loading)
+        try {
+            val response = networkDataSource.payout(saver)
             emit(DataState.Success(response))
         } catch (e: Exception) {
             when (e){

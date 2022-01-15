@@ -20,6 +20,16 @@ class MakeSavingsViewModel
 @Inject
 constructor(val repo : HomeRepository) : ViewModel() {
 
+    var ammount: String? = null
+    var saver_id: String? = null
+
+    private val _amountError = MutableLiveData<String?>()
+    val amountError: LiveData<String?> get() = _amountError
+
+    private val _saverIdError = MutableLiveData<String?>()
+    val saverIdError: LiveData<String?> get() = _saverIdError
+
+
     private val _response = MutableLiveData<DataState<SaveResponse>>()
     val response: LiveData<DataState<SaveResponse>> get() = _response
 
@@ -29,5 +39,34 @@ constructor(val repo : HomeRepository) : ViewModel() {
             _response.value = data
         }.launchIn(viewModelScope)
     }
+
+     fun validateAmountFIeld(): Boolean {
+        return if (ammount == "" || ammount.isNullOrEmpty()) {
+            _amountError.value = "this field cannot be left blank"
+            false
+        }else if (ammount!!.toInt() > 100000) {
+            _amountError.value = "Chief this amount is too much"
+            false
+        }  else {
+            _amountError.value = null
+            true
+        }
+    }
+
+     fun validateSaverIdField(): Boolean {
+        return if (saver_id == "" || saver_id.isNullOrEmpty()) {
+            _saverIdError.value = "this field cannot be left blank"
+            false
+        } else if (saver_id!!.length < 8) {
+            _saverIdError.value = "Account ID is too short"
+            false
+        }  else {
+            _saverIdError.value = null
+            true
+        }
+    }
+
+
+
 
 }
