@@ -22,6 +22,11 @@ class SaversFragment : BaseFragment<FragmentSaversBinding>(R.layout.fragment_sav
 
     @Inject lateinit var sessions : SessionManager
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun start() {
         super.start()
 
@@ -29,7 +34,7 @@ class SaversFragment : BaseFragment<FragmentSaversBinding>(R.layout.fragment_sav
         binding.data = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.savers.observe(this, Observer { response ->
+        viewModel.savers.observe(this, { response ->
             when (response) {
                 is DataState.Success<Data> -> {
                     initAdapter(response.data.savers)
@@ -54,6 +59,10 @@ class SaversFragment : BaseFragment<FragmentSaversBinding>(R.layout.fragment_sav
                 }
             }
         })
+
+        binding.addsaverbtn.setOnClickListener {
+            findNavController().navigate(SaversFragmentDirections.actionSaversFragmentToAddSaverFragment())
+        }
 
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
