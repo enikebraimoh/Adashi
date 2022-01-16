@@ -54,7 +54,7 @@
                 android:id="@+id/bankname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wema bank"
+                android:text="Guaranty Trust Bank"
                 android:textColor="@color/black"
                 android:fontFamily="@font/inter_semibold"
                 app:layout_constraintBottom_toTopOf="@+id/bankAcountNumber"
@@ -74,6 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bankname" />
 
             <Button
+                android:id="@+id/copy_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Copy"
