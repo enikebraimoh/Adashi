@@ -22,7 +22,7 @@ import ng.adashi.domain_models.agent.AgentWalletDetails
 import ng.adashi.network.SessionManager
 import ng.adashi.ui.home.models.transactions.Data
 import ng.adashi.ui.home.models.transactions.Transaction
-import ng.adashi.ui.payout.PayoutBottomSheet
+import ng.adashi.ui.deposit.PayoutBottomSheet
 import ng.adashi.ui.withdraw.WithdrawBottomSheet
 import ng.adashi.utils.DataState
 import java.text.NumberFormat
@@ -80,17 +80,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.transactions.observe(this, { response ->
             when (response) {
                 is DataState.Success<Data> -> {
+                    binding.refreshLayout.isRefreshing = false
                     initAdapter(response.data.transactions)
                     binding.viewmore.visibility = View.VISIBLE
 
                 }
                 is DataState.Error -> {
+                    binding.refreshLayout.isRefreshing = false
                     if (!response.error.localizedMessage.isNullOrEmpty()) {
                         showSnackBar(response.error.localizedMessage!!)
                     }
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
+                    binding.refreshLayout.isRefreshing = false
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
                         sessions.clearAuthToken()
                         Toast.makeText(
@@ -112,7 +115,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.wallet_ballance.observe(this, { response ->
             when (response) {
                 is DataState.Success<AgentWalletDetails> -> {
-
+                    binding.refreshLayout.isRefreshing = false
                     val newformat: NumberFormat = NumberFormat.getCurrencyInstance()
                     newformat.setMaximumFractionDigits(0)
                     newformat.setCurrency(Currency.getInstance("NGN"))
@@ -135,11 +138,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
                 is DataState.Error -> {
                     if (!response.error.localizedMessage.isNullOrEmpty()) {
+                        binding.refreshLayout.isRefreshing = false
                         showSnackBar(response.error.localizedMessage!!)
                     }
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
+                    binding.refreshLayout.isRefreshing = false
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
                         sessions.clearAuthToken()
                         /* Toast.makeText(
@@ -196,6 +201,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
             }
         )
+
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getWalletDetails()
+            viewModel.getAllTransactions()
+        }
 
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
