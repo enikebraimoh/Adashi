@@ -22,4 +22,6 @@ interface NetworkDataSource {
     suspend fun save(save : SaveDetails) : SaveResponse
     suspend fun payout(save : SaveDetails) : PayoutResponse
 
+
+
 }

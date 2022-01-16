@@ -3,6 +3,7 @@ package ng.adashi.ui.login
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -66,6 +67,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
             }
         })
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                /**
+                 *
+                 *  Callback for handling the [OnBackPressedDispatcher.onBackPressed] event.
+                 *
+                 */
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
+
     }
 
     private fun showSnackBar(message: String) {
