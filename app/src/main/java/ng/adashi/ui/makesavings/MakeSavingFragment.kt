@@ -68,9 +68,10 @@ class MakeSavingFragment : BaseFragment<FragmentMakeSavingBinding>(R.layout.frag
                 is DataState.Error -> {
                     if (!response.error.localizedMessage.isNullOrEmpty()) {
                         CancelProgressLoader()
-                        showSnackBar(response.error.localizedMessage!!)
+                        showSnackBar(response.error.localizedMessage!!.toString())
+                    } else {
+                        showSnackBar("Slow or no Internet Connection")
                     }
-                    showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
                     if (response.error?.message.equals("Unauthenticated")) {

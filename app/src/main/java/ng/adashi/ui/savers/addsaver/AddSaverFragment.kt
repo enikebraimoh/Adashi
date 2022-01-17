@@ -66,9 +66,11 @@ class AddSaverFragment : BaseFragment<FragmentAddSaverBinding>(R.layout.fragment
                 is DataState.Error -> {
                     if (!response.error.localizedMessage.isNullOrEmpty()) {
                         CancelProgressLoader()
-                        showSnackBar(response.error.localizedMessage!!)
+                        showSnackBar(response.error.localizedMessage!!.toString())
+                    } else {
+
+                        showSnackBar("Slow or no Internet Connection")
                     }
-                    showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated")) {
@@ -82,11 +84,11 @@ class AddSaverFragment : BaseFragment<FragmentAddSaverBinding>(R.layout.fragment
                         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
                     } else {
                         CancelProgressLoader()
-                        showSnackBar(response.error?.message!!)
+                        showSnackBar(response.error?.message!!.toString())
                     }
                 }
                 DataState.Loading -> {
-                    ShowProgressLoader(requireContext(),false,false)
+                    ShowProgressLoader(requireContext(), false, false)
                 }
             }
         })
@@ -106,7 +108,8 @@ class AddSaverFragment : BaseFragment<FragmentAddSaverBinding>(R.layout.fragment
         loadingdialog = Dialog(context)
         loadingdialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         loadingdialog.setContentView(R.layout.loader_dialog)
-        loadingdialog.getWindow()?.setBackgroundDrawable(context.resources.getDrawable(R.drawable.d_round_corner_white_bkg))
+        loadingdialog.getWindow()
+            ?.setBackgroundDrawable(context.resources.getDrawable(R.drawable.d_round_corner_white_bkg))
         val loader: CamomileSpinner = loadingdialog.findViewById(R.id.loader)
         loader.start()
         if (!outsideTouch) loadingdialog.setCanceledOnTouchOutside(false)
