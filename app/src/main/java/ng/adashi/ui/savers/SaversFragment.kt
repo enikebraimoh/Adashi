@@ -14,6 +14,7 @@ import ng.adashi.network.SessionManager
 import ng.adashi.ui.home.HomeFragmentDirections
 import ng.adashi.ui.savers.models.Data
 import ng.adashi.ui.savers.models.Saver
+import ng.adashi.ui.savers.saverbottomsheet.SaverDetailsBottomSheet
 import ng.adashi.utils.DataState
 import javax.inject.Inject
 
@@ -75,7 +76,12 @@ class SaversFragment : BaseFragment<FragmentSaversBinding>(R.layout.fragment_sav
 
     private fun initAdapter(data: MutableList<Saver>) {
 
-        val adapter = SaversAdapter()
+        val adapter = SaversAdapter{ saver ->
+            val BS = SaverDetailsBottomSheet(saver)
+            BS.show(requireActivity().supportFragmentManager, "something")
+        }
+
+
 
         binding.recyclerView.adapter = adapter
         adapter.submitList(data)

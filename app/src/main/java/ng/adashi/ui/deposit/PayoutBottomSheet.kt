@@ -28,12 +28,11 @@ class PayoutBottomSheet : RoundedBottomSheet() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.payout_dialogue_sheet, container, false)
 
-
         binding.copyBtn.setOnClickListener {
             val clipboard = getSystemService(requireContext(), ClipboardManager::class.java)
             val clip = ClipData.newPlainText("account","${binding.bankAcountNumber.text.toString()}\n${binding.bankname.text.toString()}\nEnike Braimoh")
             clipboard?.setPrimaryClip(clip)
-            Toast.makeText(requireContext(), "copied to clipboard 🤗", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "copied to clipboard", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

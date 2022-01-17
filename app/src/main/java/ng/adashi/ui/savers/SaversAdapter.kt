@@ -8,7 +8,7 @@ import ng.adashi.core.BaseAdapter
 import ng.adashi.databinding.SaverItemBinding
 import ng.adashi.ui.savers.models.Saver
 
-class SaversAdapter() : BaseAdapter<Saver>(DiffCallBack()) {
+class SaversAdapter(val click : (saver: Saver)->Unit) : BaseAdapter<Saver>(DiffCallBack()) {
 
     override fun createBinding(parent: ViewGroup, viewType: Int): ViewDataBinding {
         val view = SaverItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,6 +18,7 @@ class SaversAdapter() : BaseAdapter<Saver>(DiffCallBack()) {
     override fun bind(binding: ViewDataBinding, position: Int) {
         val item = getItem(position)
         (binding as SaverItemBinding).data = item
+        binding.root.setOnClickListener { click(item) }
         binding.executePendingBindings()
     }
 

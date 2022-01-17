@@ -16,6 +16,14 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 
+    <style name="detials" parent="Theme.Adashi">
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+
+    </style>
+
     <!--- bottom sheet design style -->
 
     <style name="BottomSheet" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
