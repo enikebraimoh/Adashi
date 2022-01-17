@@ -9,11 +9,15 @@ import ng.adashi.ui.makesavings.models.SaveResponse
 import ng.adashi.ui.payout.models.PayoutResponse
 import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
+import ng.adashi.ui.signup.models.SignUpData
+import ng.adashi.ui.signup.models.SignUpResponse
 import retrofit2.http.Body
 
 interface NetworkDataSource {
 
     suspend fun login(loginDetails: LoginDetails) : LoginToken
+    suspend fun signUp(signUpDetails: SignUpData) : SignUpResponse
+
     suspend fun GetAgentTransactions() : AgentTransactionsResponse
     suspend fun GetAllSavers() : SaversResponse
 

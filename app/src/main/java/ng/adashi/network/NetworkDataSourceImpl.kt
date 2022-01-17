@@ -12,6 +12,8 @@ import ng.adashi.ui.payout.models.PayoutResponse
 import ng.adashi.ui.savers.addsaver.models.SaverResponse
 import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
+import ng.adashi.ui.signup.models.SignUpData
+import ng.adashi.ui.signup.models.SignUpResponse
 import javax.inject.Inject
 
 class NetworkDataSourceImpl
@@ -20,6 +22,10 @@ constructor (private val retrofitApis : AdashiApis) : NetworkDataSource {
 
     override suspend fun login(loginDetails: LoginDetails):  LoginToken {
            return retrofitApis.Login(loginDetails)
+    }
+
+    override suspend fun signUp(signUpDetails: SignUpData): SignUpResponse {
+        return retrofitApis.signUp(signUpDetails)
     }
 
     override suspend fun GetAgentTransactions(): AgentTransactionsResponse {

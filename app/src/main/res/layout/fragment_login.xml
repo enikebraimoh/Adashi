@@ -18,7 +18,7 @@
 
         <TextView
             android:textSize="20sp"
-            android:fontFamily="@font/oswald_medium"
+            android:fontFamily="@font/inter_semibold"
             android:textColor="@color/primaryColor"
             android:id="@+id/logo"
             android:layout_width="wrap_content"

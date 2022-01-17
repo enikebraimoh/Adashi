@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="data"
+            type="ng.adashi.ui.signup.SignupViewModel" />
 
     </data>
 
@@ -19,7 +22,7 @@
 
             <TextView
                 android:textSize="20sp"
-                android:fontFamily="@font/oswald_medium"
+                android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/primaryColor"
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
@@ -37,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="48dp"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/inter_medium"
                 android:text="Login to your account \nhere"
                 android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
                 android:textSize="20sp"
@@ -52,18 +55,20 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Full Name"
+                android:fontFamily="@font/inter_regular"
+                android:hint="First Name"
+                verify_field="@{data.firstNameError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/full_name"
+                    android:id="@+id/firstname"
+                    android:text="@={data.firstName}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:padding="20dp"
                     android:singleLine="true" />
 
@@ -74,20 +79,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                verify_field="@{data.lastNameError}"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Email"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Last Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/full_name_field">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
+                    android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:fontFamily="@font/poppins_regular"
+                    android:text="@={data.lastName}"
+                    android:inputType="textPersonName"
+                    android:fontFamily="@font/inter_regular"
                     android:padding="20dp"
                     android:singleLine="true" />
 
@@ -100,19 +107,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                verify_field="@{data.emailError}"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Mobile Number"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email_field">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phone_number"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
+                    android:text="@={data.email}"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/inter_regular"
                     android:padding="20dp"
                     android:singleLine="true" />
 
@@ -123,10 +132,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                verify_field="@{data.passwordError}"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/inter_regular"
                 android:hint="Password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -135,38 +145,54 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
+                    android:text="@={data.password}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
                     android:padding="20dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                android:visibility="invisible"
+                style="@style/SpinKitView.CubeGrid"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/login_button"
+                app:layout_constraintTop_toBottomOf="@+id/login_button"
+                app:layout_constraintTop_toTopOf="@+id/login_button" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/margin_30_dp"
+                android:fontFamily="@font/inter_semibold"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins_regular"
                 android:padding="18dp"
-                android:text="Create an account"
+                android:onClick="@{()->data.signUp()}"
+                android:text="Create Account"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/login_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_field"
-                app:layout_constraintVertical_bias="0.59000003"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/login_text"
                 android:layout_width="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/inter_medium"
                 android:layout_height="wrap_content"
                 android:text="Don’t have an account? \nSign up here"
                 android:textAlignment="center"
