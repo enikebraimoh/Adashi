@@ -11,10 +11,19 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ng.adashi.R
 import ng.adashi.domain_models.login.LoginResponse
+import java.text.NumberFormat
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+
+fun convertToCurrency(data : Int): String{
+    val newformat: NumberFormat = NumberFormat.getCurrencyInstance()
+    newformat.setMaximumFractionDigits(0)
+    newformat.setCurrency(Currency.getInstance("NGN"))
+    val bal = data
+    return newformat.format(bal)
+}
 
 fun convertStringToDate(time: String): OffsetDateTime {
     val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.ENGLISH)
