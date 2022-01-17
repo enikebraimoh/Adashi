@@ -49,7 +49,8 @@ class AddSaverFragment : BaseFragment<FragmentAddSaverBinding>(R.layout.fragment
                 binding.firstname.text.toString(),
                 binding.lastName.text.toString(),
                 binding.occupation.text.toString(),
-                binding.phone.text.toString(), binding.state.text.toString()
+                binding.phone.text.toString(),
+                binding.state.text.toString()
             )
 
             viewModel.AddSaver(saver)

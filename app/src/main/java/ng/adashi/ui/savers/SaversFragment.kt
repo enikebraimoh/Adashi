@@ -38,15 +38,18 @@ class SaversFragment : BaseFragment<FragmentSaversBinding>(R.layout.fragment_sav
         viewModel.savers.observe(this, { response ->
             when (response) {
                 is DataState.Success<Data> -> {
+                    binding.refreshLayout.isRefreshing = false
                     initAdapter(response.data.savers)
                 }
                 is DataState.Error -> {
+                    binding.refreshLayout.isRefreshing = false
                     if (!response.error.localizedMessage.isNullOrEmpty()){
                         showSnackBar(response.error.localizedMessage!!)
                     }
                     showSnackBar("Slow or no Internet Connection")
                 }
                 is DataState.GenericError -> {
+                    binding.refreshLayout.isRefreshing = false
                     if (response.code == 403 || response.error?.message.equals("Unauthenticated") ){
                         sessions.clearAuthToken()
                         Toast.makeText(requireContext(), "login.. you have been idle for a while", Toast.LENGTH_SHORT).show()
@@ -71,6 +74,10 @@ class SaversFragment : BaseFragment<FragmentSaversBinding>(R.layout.fragment_sav
                 DividerItemDecoration.VERTICAL
             )
         )
+
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.getAllSavers()
+        }
 
     }
 

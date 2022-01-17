@@ -71,7 +71,7 @@
                       android:id="@+id/firstname"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="textPersonName"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
@@ -95,7 +95,7 @@
                       android:id="@+id/last_name"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="textPersonName"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
@@ -118,7 +118,7 @@
                       android:id="@+id/phone"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="phone"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
@@ -141,7 +141,7 @@
                       android:id="@+id/state"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="textPostalAddress"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
@@ -164,7 +164,7 @@
                       android:id="@+id/city"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="textPostalAddress"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
@@ -187,7 +187,7 @@
                       android:id="@+id/address"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="textPostalAddress"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
@@ -201,7 +201,7 @@
                   android:layout_marginTop="5dp"
                   android:layout_marginEnd="16dp"
                   android:fontFamily="@font/inter_regular"
-                  android:hint="Address"
+                  android:hint="Occupation"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintTop_toBottomOf="@+id/login">
@@ -210,7 +210,7 @@
                       android:id="@+id/occupation"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="textEmailAddress"
+                      android:inputType="text"
                       android:fontFamily="@font/inter_regular"
                       android:padding="20dp"
                       android:singleLine="true" />
