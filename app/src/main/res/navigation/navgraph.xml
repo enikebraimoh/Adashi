@@ -151,4 +151,9 @@
         android:id="@+id/addSaverFragment"
         android:name="ng.adashi.ui.savers.addsaver.AddSaverFragment"
         android:label="AddSaverFragment" />
+    <dialog
+        tools:layout="@layout/saverdetailsbottomsheet"
+        android:id="@+id/saverDetailsBottomSheet"
+        android:name="ng.adashi.ui.savers.saverbottomsheet.SaverDetailsBottomSheet"
+        android:label="SaverDetailsBottomSheet" />
 </navigation>
