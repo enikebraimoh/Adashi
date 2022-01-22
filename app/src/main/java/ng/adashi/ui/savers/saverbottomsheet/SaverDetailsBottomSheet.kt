@@ -38,6 +38,7 @@ class SaverDetailsBottomSheet(val data: Saver) : RoundedBottomSheet() {
         binding.saverState.text = data.state
         binding.saverAddress.text = data.address
         binding.saverPhoneNumber.text = data.phone.toString()
+        binding.saverOccupation.text = data.occupation
 
         binding.copyImage.setOnClickListener {
             val clipboard =

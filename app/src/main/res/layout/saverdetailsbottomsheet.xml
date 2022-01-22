@@ -212,6 +212,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/saver_occupation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_medium"
