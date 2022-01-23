@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_agentBasicVerificationFragment"
+            app:destination="@id/agentBasicVerificationFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_signup"
@@ -86,6 +89,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_agentBasicVerificationFragment"
+            app:destination="@id/agentBasicVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/saversFragment"
@@ -156,4 +162,22 @@
         android:id="@+id/saverDetailsBottomSheet"
         android:name="ng.adashi.ui.savers.saverbottomsheet.SaverDetailsBottomSheet"
         android:label="SaverDetailsBottomSheet" />
+    <fragment
+        android:id="@+id/agentBasicVerificationFragment"
+        android:name="ng.adashi.ui.verification.AgentBasicVerificationFragment"
+        android:label="fragment_agent_basic_verification"
+        tools:layout="@layout/fragment_agent_basic_verification" >
+        <action
+            android:id="@+id/action_agentBasicVerificationFragment_to_agentOthersVerificationFragment"
+            app:destination="@id/agentOthersVerificationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/agentOthersVerificationFragment"
+        android:name="ng.adashi.ui.verification.AgentOthersVerificationFragment"
+        android:label="fragment_agent_others_verification"
+        tools:layout="@layout/fragment_agent_others_verification" />
 </navigation>

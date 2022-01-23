@@ -176,8 +176,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         }
         binding.deposit.setOnClickListener {
-            val BS = PayoutBottomSheet()
-            BS.show(requireActivity().supportFragmentManager, "something")
+            /*val BS = PayoutBottomSheet()
+            BS.show(requireActivity().supportFragmentManager, "something")*/
+
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAgentBasicVerificationFragment())
 
         }
         binding.withdrawal.setOnClickListener {

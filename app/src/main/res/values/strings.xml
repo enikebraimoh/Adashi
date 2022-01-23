@@ -4,4 +4,5 @@
     <string name="position" translatable="false">position</string>
     <string name="agent_name">Hello %s 👋🏽</string>
     <string name="agent_text">Bank transfers to this account number, will enter <br /> your <b> Adashi wallet</b> directly</string>
+    <string name="sorry">But in order to proceed with, we will need Additional Information from you.</string>
 </resources>
