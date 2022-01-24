@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="?android:colorBackground"
-            tools:context=".ui.verification.AgentOthersVerificationFragment">
+            tools:context=".ui.verification.others.AgentOthersVerificationFragment">
 
             <TextView
                 android:layout_marginTop="@dimen/margin_20_dp"

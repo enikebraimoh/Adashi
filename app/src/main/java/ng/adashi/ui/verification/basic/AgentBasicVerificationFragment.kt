@@ -1,4 +1,4 @@
-package ng.adashi.ui.verification
+package ng.adashi.ui.verification.basic
 
 import androidx.navigation.fragment.findNavController
 import ng.adashi.R
@@ -11,8 +11,7 @@ class AgentBasicVerificationFragment : BaseFragment<FragmentAgentBasicVerificati
         super.start()
 
         binding.nextButton.setOnClickListener {
-
-            findNavController().navigate(AgentBasicVerificationFragmentDirections.actionAgentBasicVerificationFragmentToAgentOthersVerificationFragment())
+            findNavController().navigate(ng.adashi.ui.verification.AgentBasicVerificationFragmentDirections.actionAgentBasicVerificationFragmentToAgentOthersVerificationFragment())
 
         }
 

@@ -164,7 +164,7 @@
         android:label="SaverDetailsBottomSheet" />
     <fragment
         android:id="@+id/agentBasicVerificationFragment"
-        android:name="ng.adashi.ui.verification.AgentBasicVerificationFragment"
+        android:name="ng.adashi.ui.verification.basic.AgentBasicVerificationFragment"
         android:label="fragment_agent_basic_verification"
         tools:layout="@layout/fragment_agent_basic_verification" >
         <action
@@ -177,7 +177,7 @@
     </fragment>
     <fragment
         android:id="@+id/agentOthersVerificationFragment"
-        android:name="ng.adashi.ui.verification.AgentOthersVerificationFragment"
+        android:name="ng.adashi.ui.verification.others.AgentOthersVerificationFragment"
         android:label="fragment_agent_others_verification"
         tools:layout="@layout/fragment_agent_others_verification" />
 </navigation>

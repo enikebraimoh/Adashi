@@ -1,4 +1,4 @@
-package ng.adashi.ui.verification
+package ng.adashi.ui.verification.others
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
