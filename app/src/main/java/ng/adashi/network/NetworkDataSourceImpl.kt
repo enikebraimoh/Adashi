@@ -5,7 +5,6 @@ import ng.adashi.domain_models.login.LoginDetails
 import ng.adashi.network.retrofit.*
 import ng.adashi.domain_models.login.LoginToken
 import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
-import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.ui.makesavings.models.SaveDetails
 import ng.adashi.ui.makesavings.models.SaveResponse
 import ng.adashi.ui.payout.models.PayoutResponse
@@ -14,6 +13,8 @@ import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
 import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
+import ng.adashi.ui.verification.basic.models.BasicInfo
+import ng.adashi.ui.verification.basic.models.BasicInfoResponse
 import javax.inject.Inject
 
 class NetworkDataSourceImpl
@@ -50,6 +51,10 @@ constructor (private val retrofitApis : AdashiApis) : NetworkDataSource {
 
     override suspend fun payout(save: SaveDetails): PayoutResponse {
         return retrofitApis.payOut(save)
+    }
+
+    override suspend fun UpdateBasicInfo(info: BasicInfo): BasicInfoResponse {
+        return retrofitApis.UpdateBasicInfo(info)
     }
 
 }

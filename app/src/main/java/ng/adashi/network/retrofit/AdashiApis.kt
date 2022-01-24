@@ -12,8 +12,11 @@ import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
 import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
+import ng.adashi.ui.verification.basic.models.BasicInfo
+import ng.adashi.ui.verification.basic.models.BasicInfoResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface AdashiApis {
@@ -51,5 +54,11 @@ interface AdashiApis {
     suspend fun payOut(
         @Body save: SaveDetails
     ): PayoutResponse
+
+    @PATCH("agent/basic-info")
+    suspend fun UpdateBasicInfo(
+        @Body info: BasicInfo
+    ): BasicInfoResponse
+
 
 }

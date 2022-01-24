@@ -5,11 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ng.adashi.domain_models.agent.AgentWalletDetails
-import ng.adashi.repository.AuthRepository
 import ng.adashi.repository.HomeRepository
-import ng.adashi.ui.home.models.transactions.AgentTransactionsResponse
 import ng.adashi.ui.home.models.transactions.Data
-import ng.adashi.ui.home.models.wallet.AgentWalletResponse
 import ng.adashi.utils.DataState
 import javax.inject.Inject
 

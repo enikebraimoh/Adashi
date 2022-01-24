@@ -11,7 +11,8 @@ import ng.adashi.ui.savers.addsaver.models.SingleSaver
 import ng.adashi.ui.savers.models.SaversResponse
 import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
-import retrofit2.http.Body
+import ng.adashi.ui.verification.basic.models.BasicInfo
+import ng.adashi.ui.verification.basic.models.BasicInfoResponse
 
 interface NetworkDataSource {
 
@@ -25,7 +26,6 @@ interface NetworkDataSource {
     suspend fun AddSaver(saver : SingleSaver) : ng.adashi.ui.savers.addsaver.models.SaverResponse
     suspend fun save(save : SaveDetails) : SaveResponse
     suspend fun payout(save : SaveDetails) : PayoutResponse
-
-
+    suspend fun UpdateBasicInfo(info : BasicInfo) : BasicInfoResponse
 
 }
