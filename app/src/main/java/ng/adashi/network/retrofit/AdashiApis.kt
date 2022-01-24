@@ -14,6 +14,8 @@ import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
 import ng.adashi.ui.verification.basic.models.BasicInfo
 import ng.adashi.ui.verification.basic.models.BasicInfoResponse
+import ng.adashi.ui.verification.others.models.OthersInfo
+import ng.adashi.ui.verification.others.models.OthersInfoResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH
@@ -59,6 +61,11 @@ interface AdashiApis {
     suspend fun UpdateBasicInfo(
         @Body info: BasicInfo
     ): BasicInfoResponse
+
+    @PATCH("agent/other-info")
+    suspend fun updateOtherInfo(
+        @Body info: OthersInfo
+    ): OthersInfoResponse
 
 
 }

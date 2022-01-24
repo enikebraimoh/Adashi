@@ -15,6 +15,8 @@ import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
 import ng.adashi.ui.verification.basic.models.BasicInfo
 import ng.adashi.ui.verification.basic.models.BasicInfoResponse
+import ng.adashi.ui.verification.others.models.OthersInfo
+import ng.adashi.ui.verification.others.models.OthersInfoResponse
 import javax.inject.Inject
 
 class NetworkDataSourceImpl
@@ -55,6 +57,10 @@ constructor (private val retrofitApis : AdashiApis) : NetworkDataSource {
 
     override suspend fun UpdateBasicInfo(info: BasicInfo): BasicInfoResponse {
         return retrofitApis.UpdateBasicInfo(info)
+    }
+
+    override suspend fun updateOthersInfo(info: OthersInfo): OthersInfoResponse {
+        return retrofitApis.updateOtherInfo(info)
     }
 
 }

@@ -13,6 +13,8 @@ import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
 import ng.adashi.ui.verification.basic.models.BasicInfo
 import ng.adashi.ui.verification.basic.models.BasicInfoResponse
+import ng.adashi.ui.verification.others.models.OthersInfo
+import ng.adashi.ui.verification.others.models.OthersInfoResponse
 
 interface NetworkDataSource {
 
@@ -27,5 +29,5 @@ interface NetworkDataSource {
     suspend fun save(save : SaveDetails) : SaveResponse
     suspend fun payout(save : SaveDetails) : PayoutResponse
     suspend fun UpdateBasicInfo(info : BasicInfo) : BasicInfoResponse
-
+    suspend fun updateOthersInfo(info : OthersInfo) : OthersInfoResponse
 }

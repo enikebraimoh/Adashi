@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.flow
 import ng.adashi.network.NetworkDataSource
 import ng.adashi.ui.verification.basic.models.BasicInfo
 import ng.adashi.ui.verification.basic.models.BasicInfoResponse
+import ng.adashi.ui.verification.others.models.OthersInfo
+import ng.adashi.ui.verification.others.models.OthersInfoResponse
 import ng.adashi.utils.DataState
 import ng.adashi.utils.convertErrorBody
 import retrofit2.HttpException
@@ -21,6 +23,23 @@ constructor(val networkDataSource: NetworkDataSource) {
         emit(DataState.Loading)
         try {
             val response = networkDataSource.UpdateBasicInfo(info)
+            emit(DataState.Success(response))
+        } catch (e: Exception) {
+            when (e) {
+                is IOException -> emit(DataState.Error(e))
+                is HttpException -> {
+                    val status = e.code()
+                    val res = convertErrorBody(e)
+                    emit(DataState.GenericError(status, res))
+                }
+            }
+        }
+    }
+
+    fun updateOthersInfo(info : OthersInfo): Flow<DataState<OthersInfoResponse>> = flow {
+        emit(DataState.Loading)
+        try {
+            val response = networkDataSource.updateOthersInfo(info)
             emit(DataState.Success(response))
         } catch (e: Exception) {
             when (e) {

@@ -182,5 +182,9 @@
         android:id="@+id/agentOthersVerificationFragment"
         android:name="ng.adashi.ui.verification.others.AgentOthersVerificationFragment"
         android:label="fragment_agent_others_verification"
-        tools:layout="@layout/fragment_agent_others_verification" />
+        tools:layout="@layout/fragment_agent_others_verification" >
+        <action
+            android:id="@+id/action_agentOthersVerificationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
