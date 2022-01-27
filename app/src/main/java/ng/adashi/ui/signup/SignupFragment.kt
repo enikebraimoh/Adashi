@@ -36,7 +36,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
         viewModel.signUp.observe(this, { response ->
             when (response) {
                 is DataState.Success<SignUpResponse> -> {
-                    Toast.makeText(requireContext(), "Account successfully created", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "please Kindly Check your Email and verify your Account", Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
                     displayProgressBar(false)
                 }

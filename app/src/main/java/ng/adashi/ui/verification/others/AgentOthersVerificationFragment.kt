@@ -77,6 +77,7 @@ class AgentOthersVerificationFragment : BaseFragment<FragmentAgentOthersVerifica
                 is DataState.Success<OthersInfoResponse> -> {
                     CancelProgressLoader()
                     showSnackBar("Success")
+                    findNavController().navigate(AgentOthersVerificationFragmentDirections.actionAgentOthersVerificationFragmentToAgentDocsVerificationFragment())
                 }
                 is DataState.Error -> {
                     Log.d("TESTT","error in fragment")

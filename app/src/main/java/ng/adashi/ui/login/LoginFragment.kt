@@ -44,6 +44,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         viewModel.login.observe(this, { response ->
             when (response) {
                 is DataState.Success<LoginToken> -> {
+                    if (response.data.message.equals("Please verify your email \uD83D\uDCE7")){
+                        displayProgressBar(false)
+                        showSnackBar(response.data.message)
+                    }
                     displayProgressBar(false)
                 }
                 is DataState.Error -> {

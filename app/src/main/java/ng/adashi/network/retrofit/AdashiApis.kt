@@ -14,12 +14,12 @@ import ng.adashi.ui.signup.models.SignUpData
 import ng.adashi.ui.signup.models.SignUpResponse
 import ng.adashi.ui.verification.basic.models.BasicInfo
 import ng.adashi.ui.verification.basic.models.BasicInfoResponse
+import ng.adashi.ui.verification.docs.models.DocsInfoResponse
 import ng.adashi.ui.verification.others.models.OthersInfo
 import ng.adashi.ui.verification.others.models.OthersInfoResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface AdashiApis {
 
@@ -66,6 +66,17 @@ interface AdashiApis {
     suspend fun updateOtherInfo(
         @Body info: OthersInfo
     ): OthersInfoResponse
+
+
+    @Multipart
+    @PATCH("agent/doc-info")
+    suspend fun uploadDocs(
+        @Part ("idType") idType : RequestBody,
+        @Part ("idNumber") idNumber : RequestBody,
+        @Part  idFile : MultipartBody.Part,
+        @Part  billFile : MultipartBody.Part,
+        @Part  signatureFile : MultipartBody.Part,
+    ): DocsInfoResponse
 
 
 }

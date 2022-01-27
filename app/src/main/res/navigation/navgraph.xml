@@ -186,5 +186,17 @@
         <action
             android:id="@+id/action_agentOthersVerificationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_agentOthersVerificationFragment_to_agentDocsVerificationFragment"
+            app:destination="@id/agentDocsVerificationFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_agent_docs_verification"
+        android:id="@+id/agentDocsVerificationFragment"
+        android:name="ng.adashi.ui.verification.docs.AgentDocsVerificationFragment"
+        android:label="AgentDocsVerificationFragment" >
+        <action
+            android:id="@+id/action_agentDocsVerificationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
